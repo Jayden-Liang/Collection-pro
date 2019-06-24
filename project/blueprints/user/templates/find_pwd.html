@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>find pwd page</title><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style media="screen">
+    @import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700');
+    body,html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+       }
+       .main{
+         width: 100%;
+         height: 100vh;
+       }
+       .input-box{
+         margin-top:10rem;
+         width: 30%;
+         padding: 2rem;
+       }
+
+       .input-box h1, .input-box h2{
+         padding-bottom: 1rem;
+       }
+       .form-input{
+         border-radius: 18px;
+         background-color:#f5f5f5;
+         border: 1px #b6fcd5 solid;
+         width: 100%;
+         height: 40px;
+         text-align:center;
+       }
+       .form-input:hover{
+         background-color: #FFFFFF;
+       }
+
+       .myButton{
+         margin-top: 3rem;
+         border-radius: 18px;
+         background-color: #3399ff;
+         text-decoration: none;
+         width: 40%;
+         border: 1px solid;
+         border-color:#3399ff;
+         padding: 7px 13px;
+         display: inline-block;
+         color: white;
+       }
+
+
+    </style>
+  </head>
+{% block body %}
+<div class="container-fluid">
+<div class='main d-flex justify-content-center'>
+  <div class="input-box text-center">
+    <h1>找回密码</h1><br>
+    <h2>请填写注册邮箱</h2>
+      <form class="form" action="{{ url_for('user.find_pwd') }}" method="post">
+         {{ form.hidden_tag() }}
+         {{ form.email(size=20, class= 'form-input') }}
+         <div class="">
+           {% for message in form.email.errors %}
+              <small class='error'>{{ message }}</small>
+            {% endfor %}
+         </div>
+         <button type="submit" class='myButton' name="button">提交</button>
+      </form>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>admin page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<style media="screen">
+
+   .ascend::after{
+        content:"\f062";
+        font-family: "Font Awesome 5 Free"
+   }
+   .dscend{
+
+   }
+   /* #id5{
+     background-color: green;
+   } */
+
+
+
+</style>
+ <script type="text/javascript">
+   var before_submit = function(){
+   console.log('hi')
+   return true
+}
+ </script>
+ {{ moment.include_jquery() }}
+{{ moment.include_moment() }}
+{{ moment.locale('zh-cn') }}　
+  </head>
+  <body>
+    <form class="search-form" action="{{ url_for('admin.index') }}" method="GET">
+      {{ form.identity.label }} {{ form.identity(size=20, placeholder ='用户名或邮箱') }}
+    </form>
+    <form class="" action="{{ url_for("admin.index") }}" method="post" onsubmit='return before_submit()'>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">用户名</th>
+      <th scope="col">
+        <div id='id-field' class='row ascend'>ID</div>
+        </div>
+      </th>
+      <th scope="col">邮箱</th>
+      <th scope="col">创建时间</th>
+      <th scope='col'>角色</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users.items %}
+       <tr>
+         <th scope="row"><input type="checkbox" name="user_id" value="{{ user.id }}"></th>
+         <td>{{ user.username }}</th>
+         <td>{{ user.id }}</td>
+         <td>{{ user.email }}</th>
+         <td>{{ moment(user.ct).format('LLL') }}</th>
+         <td>{{ user.role.name }}</th>
+       </tr>
+    {% endfor %}
+  </tbody>
+  <input type="checkbox" name="delete" value="all">
+  <button type="submit" name="button">删除</button>
+</table>
+</form>
+<div>
+<ul class="pagination">
+  <li class="page-item">
+    <a class="page-link" href="/admin?page=1&starter=1">首页</a>
+  </li>
+   {% if users.has_prev %}
+      {% if users.prev(error_out=False).page < starter %}
+        <li class="page-item">
+          <a class="page-link" href="/admin?page={{ users.prev(error_out=False).page }}&starter={{ starter-5 }}">«</a>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="/admin?page={{ users.prev(error_out=False).page }}&starter={{ starter }}">«</a>
+        </li>
+      {% endif %}
+       {% if current_page > 5 %}
+       <li class="page-item">
+       <a class="page-link" href="/admin?page={{ starter-1 }}&starter={{ starter-5 }}">...</a>
+       </li>
+       {% endif %}
+   {% else %}
+       <li class="page-item disabled">
+       <a class="page-link" href="#">«</a>
+       </li>
+   {% endif %}
+   {% if starter+5 < pages %}
+      {% for x in range(starter, starter+5) %}
+        <li class="page-item">
+          <a class="page-link" id='id{{ x }}' href="/admin?page={{ x }}&starter={{ starter }}">{{ x }}</a>
+        </li>
+      {% endfor%}
+      <li class="page-item">
+      <a class="page-link" href="/admin?page={{ starter+5 }}&starter={{ starter+5 }}">...</a>
+      </li>
+      {% else %}
+         {% for x in range(starter, pages+1) %}
+           <li class="page-item">
+              <a class="page-link active" href="/admin?page={{ x }}&starter={{ starter }}">{{ x }}</a>
+           </li>
+         {% endfor%}
+   {% endif %}
+
+   {% if users.has_next %}
+       {% if users.next(error_out=False).page >= starter+5 %}
+         <li class="page-item">
+           <a class="page-link " href="/admin?page={{ users.next(error_out=False).page }}&starter={{ users.next(error_out=False).page }}">»</a>
+         </li>
+         {% else %}
+            <li class="page-item">
+              <a class="page-link" href="/admin?page={{ users.next(error_out=False).page }}&starter={{ starter }}">»</a>
+            </li>
+       {% endif %}
+
+       {% else %}
+           <li class="page-item disabled">
+           <a class="page-link" href="#">»</a>
+           </li>
+   {% endif%}
+   <li class="page-item">
+     <a class="page-link" href="/admin?page={{ pages }}&starter={{ pages-5 }}">尾页</a>
+   </li>
+
+</ul>
+</div>
+{{ items.paginate(users) }}
+<input id='for-js' type="hidden" name="" value="{{ current_page }}">
+<script type="text/javascript">
+   the_page = document.querySelector('#for-js').value
+   target = document.querySelector('#id'+the_page)
+   target.style.background='#81ecec'
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

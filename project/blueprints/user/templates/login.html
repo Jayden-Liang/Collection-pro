@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style media="screen">
+         @import url('https://fonts.font.im/css?family=Roboto:100,300,400,500,700');
+         body,html {
+           margin: 0;
+           padding: 0;
+           font-family: 'Roboto', sans-serif;
+            }
+            /*
+        * {
+        box-sizing: border-box;
+         } */
+       .welcome{
+         height: 100vh;
+         background-image: url('static/pics/login-bg.jpg');
+         background-size: cover;
+         background-repeat: no-repeat;
+         overflow: hidden;
+       }
+       .form-box{
+         width: 100%;
+         height: 100vh;
+         overflow: hidden;
+         padding: 1rem;
+         background: linear-gradient(rgba(114, 55, 146,1), rgba(239, 173, 183,1));
+       }
+       /* linear-gradient(113.03326428095102deg, rgba(114, 55, 146,1) 5.014840798704803%,rgba(239, 173, 183,1) 97.6753912574204%) */
+       .form-inner h1{
+            padding-bottom: 5rem;
+            font-weight: 500;
+            color: white;
+
+       }
+
+       .input-group{
+           padding: 1rem;
+       }
+      
+
+       .far, .fas{
+         font-size: 80%;
+         color: #864A98;
+       }
+
+       .myButton{
+         margin-top: 1rem;
+         border-radius: 18px;
+         background-color: #3399ff;
+         text-decoration: none;
+         width: 70%;
+         border: 1px solid;
+         border-color:#3399ff;
+         padding: 7px 13px;
+         display: inline-block;
+         color: white;
+       }
+       .new-pwd{
+        padding-left: 1rem;
+       }
+
+
+    </style>
+  </head>
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-flex justify-content-center align-items-center welcome col-lg-4">
+       <h1>Welcome</h1>
+       <p>hellnf  dfajk jafkj ierh</p>
+    </div>
+    <!-- 登入box -->
+    <div class="form-box d-flex justify-content-center align-items-center col-lg-8">
+      <div class="form-inner">
+      <h1 class="display-4"> Sign In Account</h1>
+     <form class="form" action="{{ url_for('user.login') }}" method="post">
+       {{ form.hidden_tag() }}
+       <!-- 第一个input -->
+       <div class="input-group input-group-lg">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-lg"> <i class='far fa-envelope'></i> </span>
+        </div>
+       {{ form.identity(size=20, class= 'form-control') }}
+       {% for message in form.identity.errors %}
+         <small class='error'>{{ message }}</small>
+       {% endfor %}
+     </div>
+     <!-- 第二个input -->
+     <div class="input-group input-group-lg">
+       <div class="input-group-prepend">
+         <span class="input-group-text" id="inputGroup-sizing-lg"><i class='fas fa-user-lock'></i></span>
+      </div>
+       {{ form.password(size=20, class= 'form-control') }}
+       {% for message in form.password.errors %}
+         <small class='error'>{{ message }}</small>
+        {% endfor %}
+      </div>
+      <a class='new-pwd' href="{{ url_for('user.find_pwd') }}">忘记密码？</a>
+      <div class="d-flex justify-content-center">
+          <button type="submit" class='myButton' name="button">登入</button>
+      </div>
+     </form>
+
+   </div>
+   </div>
+  </div>
+</div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}
+</html>

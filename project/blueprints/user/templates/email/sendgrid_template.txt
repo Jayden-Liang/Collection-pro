@@ -1,0 +1,10 @@
+Hello,{{ name }}
+
+You are in the process of changing your password, please click the following link to proceed.
+
+{{ url_for('user.set_new_pwd', reset_token = token, _external =True)}}
+
+Warning, if this is not requested by yourself, please ignore this email! Thank you!
+
+Best regards!
+Jayden

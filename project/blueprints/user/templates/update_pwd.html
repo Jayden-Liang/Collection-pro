@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>update pwd page</title>
+  </head>
+{% block body %}
+<h1>this is the page for updating pwd</h1><br>
+  <form class="form" action="{{ url_for('user.update_pwd') }}" method="post">
+     {{ form.hidden_tag() }}
+     {{ form.identity.label }} {{ form.identity(size=20, class= 'form-control') }}
+     {{ form.curent_password.label }} {{ form.curent_password(size=20, class= 'form-control') }}
+     {{ form.new_pwd.label }} {{ form.new_pwd(size=20, class= 'form-control') }}
+     <button type="submit" name="button">提交</button>
+  </form>
+  <br>
+  <a href="{{ url_for('user.settings') }}"></a>
+{% endblock %}
+</html>

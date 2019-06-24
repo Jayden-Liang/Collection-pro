@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>set new pwd page</title>
+  </head>
+{% block
+   body %}
+   <h1>请更改新的密码</h1>
+  <form class="form" action="{{ url_for('user.set_new_pwd') }}" method="post">
+    {{ form.hidden_tag() }}
+     {{ form.new_pwd.label }} {{ form.new_pwd(size=20, class= 'form-control') }}
+     {% for message in form.new_pwd.errors %}
+        <small class='error'>{{ message }}</small>
+      {% endfor %}
+     <button type="submit" name="button">提交</button>
+  </form>
+{% endblock %}
+</html>

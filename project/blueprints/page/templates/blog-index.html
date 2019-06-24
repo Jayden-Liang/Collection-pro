@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Collection{% endblock %}
+
+{% block head %}
+ <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/blog/main.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+<div class='row container-fluid' id="main-sec">
+   	<div class='col col-md-7'>
+   		<div class='daily-blog'>
+   		    <h2 class='blog-intro'>今日份知识</h2>
+   		    <div class='body-and-tag'>
+   		    <div class='row blog-title'>
+   		        <div class='col col-sm-8'><h3><a class='text-white' href="/detail?title={{ blog.id }}">{{ blog.title }}</a></h3></div>
+   		    </div>
+   		    <div class='row blog-tag'>
+   		        <div class='col col-sm-6'><span class='fa-icon'><i class="fas fa-tag"></i></span><a class='tag' href='/topic?sort_by={{ blog.topic }}&page=1'> {{ blog.topic }}</a></div>
+   		        <div class='col col-sm-6' ><button class='mybutton btn btn-transparent ml-auto'></button></div>
+   		    </div>
+   		    </div>
+   		</div>
+   	</div>
+	<div class="col col-md-5 b">
+		<div class="person-info">
+			<img class="portrait"  src="{{ url_for('static', filename='pic/portrait.gif') }}" width='200px' height="200px" alt="Card image cap">
+        <h2 class=" name text-center">Jayden Liang </h2>
+        <h6 class='quote'> 给自己一个沉迷学习的机会！</h6>
+
+
+	    </div>
+</div>
+</div>
+<!-- section slide -->
+<div class="container text-center slides">
+	<div class="row">
+		<div class="col col-md-4">
+			<div class="card" style="width: 18rem;">
+           <img class="card-img-top" src="{{ url_for('static', filename='pic/bg1.jpg') }}"  height="150rem" alt="Card image cap">
+            <div class="card-body">
+                 <p class="card-text">afag</p>
+			</div>
+			</div>
+        </div>
+		<div class="col col-md-4">
+			<div class="card" style="width: 18rem;">
+           <img class="card-img-top" src="{{ url_for('static', filename='pic/bg_for_base.jpg') }}"  height="150rem" alt="Card image cap">
+            <div class="card-body">
+                 <p class="card-text">afag</p>
+			</div>
+			</div>
+        </div>
+		<div class="col col-md-4">
+			<div class="card" style="width: 18rem;">
+           <img class="card-img-top" src="{{ url_for('static', filename='pic/bg3.jpg') }}" height="150rem" alt="Card image cap">
+            <div class="card-body">
+                 <p class="card-text">afdg</p>
+			</div>
+			</div>
+        </div>
+	</div>
+	</div>
+
+{% endblock %}

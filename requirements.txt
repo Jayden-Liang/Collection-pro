@@ -1,0 +1,21 @@
+Flask
+mysqlclient==1.3.4
+# Application server for both development and production.
+gunicorn
+pytest==4.3.0
+pytest-cov
+flake8
+flask-debugtoolbar
+Flask-WTF
+Flask-SQLAlchemy
+Flask-Login
+WTForms-Components
+Click
+sqlalchemy-utils
+bcrypt
+sendgrid
+redis
+celery
+python-dotenv
+flask-moment
+Faker

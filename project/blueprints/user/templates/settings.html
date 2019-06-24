@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>settings page</title>
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
+    {{ moment.locale('zh-cn') }}　
+  </head>
+{% block body %}
+<h1>This is setting page</h1><br>
+<p>your user info is </p>
+<p>邮箱是:{{ current_user.email }}</p> <a href="{{ url_for('user.update_email') }}">更改绑定邮箱</a>
+<br>
+<a href="{{ url_for('user.update_pwd') }}">更改密码</a>
+<br>
+<p>此次于{{ current_user.current_login_time }} 登录，IP为：{{ current_user.current_login_ip }}</p>
+<p>上次登录：{{ current_user.last_login_time }}</p>
+<p>上次登录ip: {{ current_user.last_login_ip }}</p>
+<p>注册时间为： {{ moment(current_user.ct).format('LLL') }}  </p>
+<p>最近在线为：{{ moment(current_user.latest_online).fromNow() }}</p>
+{% if current_user.username %}
+   <p>您的用户名是: {{ current_user.username }}</p>
+{% else %}
+   <p>you are not choose a username yet</p> <a href="{{ url_for('user.welcome') }}">go choose one</a>
+{% endif %}
+
+{% endblock %}
+</html>
