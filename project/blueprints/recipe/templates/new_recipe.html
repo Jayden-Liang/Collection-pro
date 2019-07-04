@@ -1,0 +1,63 @@
+{% extends 'recipe_base.html' %}
+{% block head %}
+<title>Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style/recipe/dropzone.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style/recipe/drop_basic.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style/recipe/new.css') }}">
+
+{% endblock %}
+
+{% block body %}
+<h1>New Recipe</h1>
+<div class="first-f">
+
+<form class="" action="{{ url_for('recipe.new') }}" method="post">
+  {{ form.hidden_tag() }}
+  <fieldset>
+    <h3>请输入菜名</h3>
+    {{ form.title(class= 'form-title form-control', size="5", placeholder='菜名') }}
+    <h4>选择分类</h4>
+    {{ form.category(class='form-control form-select') }}
+    <h4>请输入标签  <small class='tag-small'>（ 简要的词汇描述一下 ）</small></h4>
+    <div class="myInput">
+     <input class='input-inner' placeholder='标签，按enter确认' type="text" name="" value="">
+    </div>
+    {{ form.ingredients (class='ingredients form-ctl', placeholder='添加材料' ) }} <button type="button" display='inline-block' class="ingre-btn btn btn-primary">+</button>
+    <div class="ingre">
+      <ul>
+
+      </ul>
+    </div>
+    {{ form.steps(class='form-steps form-control form-ctl', placeholder='步骤，如第一步:...', display='inline-block' ) }}<button type="button" display='inline-block' class="steps-btn btn btn-primary">+</button>
+     <div class="steps">
+       <ul>
+
+       </ul>
+     </div>
+  </fieldset>
+
+   <p>请确认无误后点击上传图片，<span>确认后将不能修改</span></p>
+  <button class='submit_btn btn btn-success' type="button"  name="button">上传图片</button>
+</form>
+</div>
+
+<div class="upload" >
+  <h1>Upload</h1>
+  <div class="">
+    {{ dropzone.create(action='recipe.test') }}
+  </div>
+<a href="{{ url_for('recipe.index') }}">完成</a>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/recipe/new_ajax.js') }}"></script>
+<script src="{{ url_for('static', filename='js/recipe/new.js') }}"></script>
+<script type="text/javascript">
+  window.onload=function(){
+    document.querySelector('#myDropzone').insertAdjacentHTML('afterBegin', '<input class="hidden-input" type="hidden" name="bind" value="">')
+  }
+</script>
+<script src='{{ url_for('static', filename='js/recipe/dropzone.js')}}' type="text/javascript"></script>
+{{ dropzone.config() }}
+
+{% endblock %}

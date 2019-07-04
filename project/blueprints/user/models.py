@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique = True, index=True)
     password = db.Column(db.String(128), nullable=False, server_default='')
     ct = db.Column(db.DateTime())
+    active = db.Column(db.Integer)
 
     latest_online = db.Column(db.DateTime())
 
@@ -24,6 +25,10 @@ class User(UserMixin, db.Model):
     blogs = db.relationship('Blog', back_populates='user')
 
     topics = db.relationship('Topic', back_populates='user')
+
+    todos = db.relationship('Todo', back_populates='user')
+
+    recipes = db.relationship('Recipe', back_populates='user')
 
     sign_in_count = db.Column(db.Integer, nullable=False, default=0)    #如果ip不一样，那么这里加1
     last_login_time = db.Column(db.DateTime())
@@ -94,5 +99,26 @@ class Todo(db.Model):
     ct =db.Column(db.DateTime())
     finished_time = db.Column(db.DateTime())
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', back_populates='todos')
+
     def __repr__(self):
         return '<Todo {}>'.format(self.body)
+
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    ingredients = db.Column(db.String(500))
+    steps = db.Column(db.String(1500))
+    ct =db.Column(db.DateTime())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', back_populates='recipes')
+
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category = db.relationship('Category', back_populates='recipes')
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    body = db.Column(db.String(120))
+
+    recipes = db.relationship('Recipe', back_populates='category')

@@ -1,0 +1,9 @@
+html, body{
+  margin: 0px !important;
+  padding: 0px !important;
+  background-color: f8f8f8;
+}
+
+.myNav{
+  border: 1px solid;
+}

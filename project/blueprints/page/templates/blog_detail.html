@@ -1,0 +1,67 @@
+{% extends 'blog_base.html' %}
+
+{% block head %}
+    <title>详情</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/blog/blogDetail.css') }}">
+
+{% endblock %}
+
+{% block body %}
+   <div class='container whole'>
+   <h2 class='text-center article-title'>{{ article.title }}</h2>
+   <div class='below-h2 text-center'>
+        <div>{{ moment(article.ct).format('LLL') }}     <i class="fas fa-tag"></i><a class='tag' href='{{ url_for('page.blog_topic', sort_by=article.topic.body, page=1 ) }}'> {{ article.topic.body }}</a></div>
+   </div>
+
+   <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#f1f1f1 SIZE=1>
+       <div id="test-editormd-view">
+            <textarea style="display:none;" name="test-editormd-html-doc">{{ article.body | safe  }}</textarea>
+       </div>
+
+       <!-- 这里要博客的所有者才能显示 -->
+       {% if current_user.username == article.user.username %}
+       <div class='operation row'>
+       	<div class='col col-sm-10'></div>
+       	<div class='col col-sm-2 buttons'>
+       <a class=' btn btn-dark' href="{{ url_for('page.update', article_id = article.id) }}">修改</a>
+      <form class='form-group' method='POST' action="{{ url_for('page.delete', delete_id = article.id) }}">
+       	   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+           <button type="submit" class='btn btn-primary' name="button">删除</button>
+       </form>
+       </div>
+       </div>
+       {% endif %}
+   </div>
+
+   {{ moment.include_jquery() }}
+   {{ moment.include_moment() }}
+   {{ moment.locale('zh-cn') }}　
+
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/marked.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/prettify.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/raphael.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/underscore.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/sequence-diagram.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/flowchart.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/lib/jquery.flowchart.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/editormd.js') }}"></script>
+
+<script type="text/javascript">
+    var testEditor;
+    $(function() {
+        testEditor = editormd.markdownToHTML("test-editormd-view", {
+            htmlDecode : "style,script,iframe",
+            emoji : true,
+            taskList : true,
+            tex : true, // 默认不解析
+            flowChart : true, // 默认不解析
+            sequenceDiagram : true, // 默认不解析
+            codeFold : true,
+
+        });
+    });
+</script>
+
+{% endblock %}

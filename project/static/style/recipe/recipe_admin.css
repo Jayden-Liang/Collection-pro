@@ -1,0 +1,129 @@
+/* https://demo.bootstrapious.com/admin-premium/1-4-5/tables-datatable.html */
+@font-face {
+  font-family: 'NotoSansCJK-Light-3';
+  src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf')
+}
+
+html, body{
+  color: #777777;
+  height: 100%;
+  width: 100%;
+  font-family: 'NotoSansCJK-Light-3' ;
+}
+
+.navbar-expand-lg{
+  background-color: #003366 !important;
+}
+
+.navbar-light a{
+  color:white !important;
+  font-weight: 600;
+}
+
+.sidebar-header{
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+}
+
+#content{
+  width: 100%;
+  padding-left: 2rem;
+  background-color: #EEF5F9;
+  margin-left: 250px;
+}
+.navbar {
+    height: 70px;
+    background: #fff;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+
+}
+
+#sidebar {
+    min-width: 250px;
+    background: #FFFFFF;
+    transition: all 0.3s;
+    /* border: 1px rgba(0, 0, 0, 0.1) solid; */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-top: none;
+    position: absolute;
+    top:70px;
+    bottom: 0;
+}
+
+a{
+  color: inherit;
+}
+
+a:hover{
+  text-decoration: none;
+}
+#sidebar  ul li{
+  padding: 0.8rem;
+}
+
+#sidebar .active{
+  background-color: #796AEE;
+  color: white !important;
+}
+
+/* content */
+.summary{
+  margin-top: 3rem;
+  padding: 2rem;
+  margin-right: 2rem;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.summary .round{
+  vertical-align: middle;
+}
+h4 span{
+  color:black;
+  font-weight: 600;
+}
+.round, .round-1, .round-2, .round-3{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: #40e0d0;
+  border-radius: 50%;
+  margin-right: 1rem;
+  vertical-align: middle;
+}
+
+.round-1{
+  background: #ffa500;
+}
+.round-2{
+  background: #ff7373;
+}
+.round-3{
+  background: #800080;
+}
+
+.summary .col{
+  border-right: 1px solid;
+  border-color: #b0e0e6;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.last-col{
+  border: none !important;
+}
+
+/* chart */
+#myChart{
+  margin-top: 2rem;
+  background-color: white;
+  width: 50% !important;
+  height: auto !important;
+
+}

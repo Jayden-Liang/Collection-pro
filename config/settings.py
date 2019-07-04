@@ -8,6 +8,13 @@ DEBUG = True
 SERVER_NAME = 'localhost:5000'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+#flask dropzone
+# MAX_CONTENT_LENGTH =3*1024*1024
+DROPZONE_ENABLE_CSRF = True
+DROPZONE_MAX_FILE_SIZE =3
+DROPZONE_MAX_FILES= 30
+DROPZONE_SAVE_PATH='static/pics'
+
 
 # SQLAlchemy.
 db_uri = 'mysql+mysqldb://jayden:devpassword@mysql:3306/collection?charset=utf8mb4'

@@ -1,4 +1,4 @@
-from wtforms import TextAreaField, SubmitField, StringField, PasswordField, HiddenField
+from wtforms import TextAreaField, SubmitField, StringField, PasswordField, HiddenField, SelectField
 from wtforms.validators import DataRequired, Length, Email
 from flask_wtf import FlaskForm
 from project.blueprints.user.utils.utils_form import check_exist, check_email

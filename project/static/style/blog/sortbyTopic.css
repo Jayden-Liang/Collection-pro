@@ -1,0 +1,80 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  background-color: f8f8f8;
+}
+.myNav{
+  padding: 1rem;
+  background-color: #B1B2C4;
+  margin-bottom: 1rem;
+
+}
+.myNav .nav-link {
+  color: white !important;
+}
+
+
+@font-face {
+ font-family: 'NotoSansCJK-Light-3';
+ src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf')
+}
+
+#main{
+    font-family:NotoSansCJK-Light-3;
+    font-size: 120%;
+}
+
+
+
+.each{
+
+	margin-left: 2rem;
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+/*	border-bottom-style: solid;
+	border-width: 0.03rem;
+	border-color:#000;*/
+
+}
+
+.content{
+	background-color: white;
+    color:#133337;
+	border-radius: 8px;
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+/*	height: 80vh;*/
+	-webkit-box-shadow: 0px 0px 12px 0px rgba(110,104,110,0.83);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(110,104,110,0.83);
+    box-shadow: 0px 0px 12px 0px rgba(110,104,110,0.83);
+
+}
+
+a{
+	color: #003366;
+}
+
+.text-color{
+	color:#800080;
+	font-size: 0.6rem;
+
+
+
+}
+.border-line{
+	margin-top: 0;
+	padding-top:0;
+}
+.catagory{
+	color: white;
+	font-size:2rem;
+	margin-left: 3rem;
+	width: 80%;
+	margin-top: 2rem;
+	padding: 1rem;
+/*	border-style: solid;
+	border-width: 0.03rem;*/
+	border-radius: 10px;
+	background-color: #ff7373;
+
+}

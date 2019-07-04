@@ -1,0 +1,76 @@
+{% extends 'blog_base.html' %}
+
+{% block head %}
+    <title>{{ topic }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/blog/sortbyTopic.css') }}">
+
+{% endblock %}
+
+{% block body %}
+<div class='container' id='main'>
+    <div class='row'>
+        <div class='col col-md-7'>
+        	<div class='content'>
+             {% for article in articles.items %}
+        	<div class='each row'>
+        	  <div class='col col-sm-10'><a href="blog/detail?id={{ article.id }}">{{ article.title }}</a> </div>
+               <div class='col col-sm-2'><span class='text-color'>{{ moment(article.ut).fromNow() }}</span></div>
+               </div>
+        	  <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#f1f1f1 SIZE=1>
+            {% endfor %}
+        </div>
+        </div>
+        <div class='col col-md-5  other-col'>
+        	<div class='catagory'>
+        		<h1>{{ topic }}</h1>
+        		<p class='text-center'>关于{{ topic }}方面的知识！</p>
+
+        	</div>
+        </div>
+    </div>
+    <div>
+    <ul class="pagination">
+        {% if articles.has_prev %}
+            <li class="page-item">
+            <a class="page-link" href="/topic?sort_by={{ topic }}&page={{ articles.prev(error_out=False).page }}">&laquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#">&laquo;</a>
+            </li>
+        {% endif %}
+
+        {% for x in range(pages) %}
+            <li class="page-item">
+              <a class="page-link" href="/topic?sort_by={{ topic }}&page={{ x + 1 }}">{{ x +1 }}</a>
+            </li>
+        {% endfor %}
+        {% if articles.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="/topic?sort_by={{ topic }}&page={{ articles.next(error_out=False).page }}">&raquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+</div>
+{{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
+    {{ moment.locale('zh-cn') }}　
+<script>
+    var pagination_cls = document.getElementsByClassName('pagination')[0]
+    pagination_cls.addEventListener('click', function(event){
+        var focus = event.target
+        focus.parentElement.classList.add('active')
+        // last_focus = document.getElementsByClassName('active')[0]
+        // if (last_focus){
+        //     last_focus.classList.remove('active')
+        // }
+        console.log('被点击的元素',focus)
+
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'recipe_base.html' %}
+
+
+
+{% block head %}
+<title>Admin</title>
+<link rel="stylesheet" href="{{url_for('static', filename='style/recipe/recipe_admin.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="wrapper">
+  <!-- sidebar -->
+  <nav id='sidebar'>
+    <div class="sidebar-header">
+        <h3>Admin Dashboard</h3>
+    </div>
+      <ul class="list-unstyled components">
+          <p>Dummy Heading</p>
+      <li class="active">
+            <a href="{{ url_for('recipe.admin') }}">Home</a>
+      </li>
+      <li>
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">管理</a>
+        <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <a href="{{ url_for('recipe.admin_user') }}">用户管理</a>
+            </li>
+            <li>
+              <a href="{{ url_for('recipe.all_recipes') }}">菜谱管理</a>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">其他</a>
+      </li>
+      <li>
+      <a href="#">More</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- page content -->
+ <div id="content">
+   <div class="summary">
+     <div class="row">
+       <div class="col col-sm-6 col-md-3">
+         <div class="myH4">
+           <h4> <span class="round"></span>总用户：<span>120</span></h4>
+         </div>
+       </div>
+       <div class="col col-sm-6 col-md-3">
+         <div class="">
+           <h4><span class="round-1"></span>今日访问：<span>30</span></h4>
+         </div>
+       </div>
+       <div class="col col-sm-6 col-md-3">
+         <div class="">
+           <h4><span class="round-2"></span>上传菜谱：<span>40</span></h4>
+         </div>
+       </div>
+       <div class="col col-sm-6 col-md-3 last-col">
+         <div class="">
+           <h4><span class="round-3"></span>总上传菜谱：<span>200</span></h4>
+         </div>
+       </div>
+     </div>
+   </div>
+
+<!-- //canvas chart -->
+<canvas id="myChart">
+
+</canvas>
+
+   <h2>Collapsible Sidebar Using Bootstrap 4</h2>
+            <p>Lorem ipsum dolor sit ametpaum.</p>
+            <p>Lorem e vaborum.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 100, 5, 2, 20, 30, 45]
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+
+{% endblock %}

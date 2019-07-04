@@ -1,0 +1,92 @@
+{% extends 'blog_base.html' %}
+
+
+{% block head %}
+<title>发布</title>
+
+<link rel="stylesheet" href="{{ url_for('static',filename='style/blog/editor.md-master/css/editormd.css')}}" />
+
+<style>
+	/* .nav-sec{
+ 		height: 8vh;
+ 	} */
+
+  .myNav{
+    background-color: #B1B2C4;
+    margin-bottom: 1rem;
+
+  }
+
+  .myNav .nav-link {
+    color: white !important;
+  }
+
+	.title{
+		margin-top: 2rem;
+	   margin-left: 5rem;
+		 margin-bottom: 20px;
+	}
+
+
+
+	.button-new{
+    margin-left: 5rem;
+		width: 80px;
+	}
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('page.new') }}" method='POST' class='form-new form-group' id='weibo_form'>
+	    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+			<div  class = 'title'>
+			<input type="text"  class="form-control " style="width: 45%"   name="title" placeholder="请输入标题">
+			</div>
+
+    <div id="test-editormd">
+                <textarea style="display:none;" name='body' form="weibo_form">
+                </textarea>
+    </div>
+     <div class="title">
+
+		<select class="form-control" name='topic' style="width: 45%">
+		 {% for topic in topics %}
+			 <option id='{{ topic.body }}' value="{{ topic.body }}">{{ topic.body }}</option>
+			 {% endfor %}
+		</select>
+		</div>
+    <button type="submit" class="btn btn-light bg-primary button-new">提交</button>
+</form>
+
+<!-- <script type="text/javascript">
+	all = document.querySelector('#All')
+	all.setAttribute('style', 'display:none;')
+</script> -->
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/examples/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename='style/blog/editor.md-master/editormd.min.js') }}"></script>
+<script type="text/javascript">
+			var testEditor;
+
+            $(function() {
+                testEditor = editormd("test-editormd", {
+                    width   : "90%",
+                    height  : 640,
+                    syncScrolling : "single",
+                    path    : "{{ url_for('static',filename='style/blog/editor.md-master/lib/') }}",
+                    saveHTMLToTextarea : true
+                });
+
+                /*
+                // or
+                testEditor = editormd({
+                    id      : "test-editormd",
+                    width   : "90%",
+                    height  : 640,
+                    path    : "{{ url_for('static',filename='editor.md-master/lib/') }}"
+                });
+                */
+            });
+        </script>
+{% endblock %}

@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'NotoSansCJK-Light-3';
+  src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf')
+}
+
+html, body{
+  color: #222;
+  font-family: 'NotoSansCJK-Light-3' ;
+
+}
+
+
+.myNav{
+  background-color: #cccccc;
+}
+
+.myNav li, .myNav a{
+  color: white;
+}
+body, html{
+     margin: 0px;
+
+}
+.category{
+
+}
+h4 a{
+  color:#222;
+  text-decoration: none;
+}
+.east{
+  background-color: #fa8072;
+  padding: 0.7rem;
+  border-top-left-radius:10px;
+  border-bottom-left-radius: 10px;
+
+}
+.west{
+  background-color: #7fffd4;
+  padding: 0.7rem;
+  border-top-right-radius:10px;
+  border-bottom-right-radius: 10px;
+}
+
+.display{
+   background-color: #f2f2f2;
+   padding-bottom: 1rem;
+}
+
+.jumbotron{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #ffdab9;
+}
+.carousel-item .carousel-caption{
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  width: 50%;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+.carousel-item img{
+  height: 750px;
+  width: 1550px;
+  margin: auto;
+}
+.fa-heart{
+  color: #ff4040;
+}
+.popular{
+  margin-top: 2rem;
+}
+.fa-lemon{
+  color: #00ff00;
+  padding-right: 1rem;
+}
+
+.fa-hotjar{
+  color: #ff0000;
+  padding-right: 1rem;
+}
+/* fix-wrap */
+
+.fixed-wrap{
+  background-image:url('../pics/fix-bg.jpg');
+  height: 45vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+/* footer */
+footer {
+  background-color: #003366;
+  color:white;
+  padding-top: 2rem;
+}
+a {
+  text-decoration: none;
+}
+
+
+/* .jumbotron {
+  height: 10vh;
+} */
+/* .carousel-item{
+  heigth: 40vh;
+} */

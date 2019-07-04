@@ -1,0 +1,100 @@
+@font-face {
+font-family: 'NotoSansCJK-Thin-2';
+src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Thin-2.otf');
+}
+
+@font-face {
+font-family: 'NotoSansCJK-Light-3';
+src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf');
+}
+
+body{
+  font-family:NotoSansCJK-Light-3.otf;;
+}
+
+.myNav{
+  padding: 1rem;
+  background-color: #B1B2C4;
+  margin-bottom: 1rem;
+
+}
+
+.myNav .nav-link {
+  color: white !important;
+  font-weight: 400;
+  font-family:NotoSansCJK-Light-3.otf;
+  font-size: 105%;
+}
+
+#test-editormd-view{
+  background-color: #f5f5f5;
+  font-family:NotoSansCJK-Light-3;
+}
+
+.markdown-body{
+  background-color: #f5f5f5;
+  padding:2rem;
+}
+
+
+
+h2, h3, h4, h5, h6{
+font-weight: 500;
+color:#133337;
+}
+
+.below-h2{
+display: inline;
+vertical-align: center;
+font-size: 0.7rem;
+margin-top:1rem;
+}
+.tag{
+color: #008080;
+font-size: 0.7rem;
+}
+.fa-tag{
+color: #00ffff;
+
+}
+.whole{
+margin-top: 2rem;
+}
+
+.prettyprint{
+
+background-color: #ffc0cb;
+margin-left: 3rem;
+border-radius: 5px;
+}
+
+.tag, .atn, .pun, .str, .pln, .pun, .atv, .kwd{
+font-size: 0.9rem;
+}
+
+code{
+font-size: 0.9rem;
+
+}
+
+.text{
+font-size: 0.9rem;
+}
+
+p, span{
+font-size:0.9rem;
+}
+
+ul li{
+font-size:0.9rem;
+}
+/*	.operation{
+float: right;
+   width：100px;
+   margin-right: 100px;
+}
+
+*/
+.buttons{
+  display: inline-block;
+}

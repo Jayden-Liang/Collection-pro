@@ -29,6 +29,13 @@ def add_role_account():
         db.session.add(user)
         db.session.commit()
 
+@click.command()
+def roles():
+    roles = ['Guest','Blocked','User','Moderator', 'Admin']
+    for name in roles:
+        db.session.add(Role(name=name))
+        db.session.commit()
+    print('添加role完毕')
 
 
 @click.command()
@@ -38,7 +45,7 @@ def users():
     """
     user_emails = []
     data =[]
-    for i in range(300):
+    for i in range(100):
         user_emails.append(fake.email())
     while True:
         email = user_emails.pop()
@@ -96,7 +103,7 @@ def topics():
         a.append(r[1])
     a.remove('All')
     for x in a:
-        x =x.encode('utf8')
+        # x =x.encode('utf8')
         topic = Topic(body=x)
         topic.user_id=user.id
         db.session.add(topic)

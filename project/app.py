@@ -3,8 +3,9 @@ from celery import Celery
 from project.blueprints.page.route_index import page
 from project.blueprints.user.views import user
 from project.blueprints.admin.views import admin
+from project.blueprints.recipe.views import recipe
 from project.blueprints.user.models import User
-from project.extensions import  csrf, db, login_manager, moment
+from project.extensions import  csrf, db, login_manager, moment, dropzone
 from datetime import datetime
 
 def create_app(settings_override=None):
@@ -20,12 +21,19 @@ def create_app(settings_override=None):
     app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4'
     if settings_override is not None:
         app.config.update(settings_override)
-    app.register_blueprint(page)
-    app.register_blueprint(user)
-    app.register_blueprint(admin)
+    blueprints(app)
     extension(app)
     authentication(app)
     return app
+
+
+#blueprints
+def blueprints(app):
+    app.register_blueprint(page)
+    app.register_blueprint(user)
+    app.register_blueprint(admin)
+    app.register_blueprint(recipe)
+
 
 #celery
 CELERY_TASK_LIST =[
@@ -52,6 +60,7 @@ def extension(app):
     db.init_app(app)
     login_manager.init_app(app)
     moment.init_app(app)
+    dropzone.init_app(app)
     return None
 
 def authentication(app):
@@ -60,7 +69,9 @@ def authentication(app):
     @login_manager.user_loader
     def load_user(uid):
         u = User.query.get(uid)
-        # if u is not None:
-        #     u.latest_online = datetime.utcnow
-        #     u.save()
+        if u is not None:
+            ct = datetime.utcnow()
+            u.latest_online = ct
+            #转换datetime.fromtimestamp(timestamp)
+            u.save()
         return u
