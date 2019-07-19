@@ -4,73 +4,84 @@
     <title>{{ topic }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/blog/sortbyTopic.css') }}">
 
+
 {% endblock %}
 
 {% block body %}
 <div class='container' id='main'>
     <div class='row'>
         <div class='col col-md-7'>
-        	<div class='content'>
+          <div class='content'>
              {% for article in articles.items %}
-        	<div class='each row'>
-        	  <div class='col col-sm-10'><a href="blog/detail?id={{ article.id }}">{{ article.title }}</a> </div>
+          <div class='each row'>
+            <div class='col col-sm-10'><a href="blog/detail?id={{ article.id }}">{{ article.title }}</a> </div>
                <div class='col col-sm-2'><span class='text-color'>{{ moment(article.ut).fromNow() }}</span></div>
                </div>
-        	  <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#f1f1f1 SIZE=1>
+            <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#f1f1f1 SIZE=1>
             {% endfor %}
         </div>
         </div>
         <div class='col col-md-5  other-col'>
-        	<div class='catagory'>
-        		<h1>{{ topic }}</h1>
-        		<p class='text-center'>关于{{ topic }}方面的知识！</p>
+          <div class='catagory'>
+            <h1>{{ topic }}</h1>
+            {% if topic  == 'All' %}
+               <p class='text-center'>显示所有的结果</p>
+            {% elif topic == 'search' %}
+               <p class='text-center'>显示所有"{{ query if query }}"相关的搜索结果！</p>
+            {% else %}
+               <p class='text-center'>关于{{ topic }}方面的知识！</p>
+            {% endif %}
 
-        	</div>
+
+          </div>
         </div>
     </div>
     <div>
-    <ul class="pagination">
-        {% if articles.has_prev %}
-            <li class="page-item">
-            <a class="page-link" href="/topic?sort_by={{ topic }}&page={{ articles.prev(error_out=False).page }}">&laquo;</a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-            <a class="page-link" href="#">&laquo;</a>
-            </li>
-        {% endif %}
 
-        {% for x in range(pages) %}
-            <li class="page-item">
-              <a class="page-link" href="/topic?sort_by={{ topic }}&page={{ x + 1 }}">{{ x +1 }}</a>
-            </li>
-        {% endfor %}
-        {% if articles.has_next %}
-            <li class="page-item">
-            <a class="page-link" href="/topic?sort_by={{ topic }}&page={{ articles.next(error_out=False).page }}">&raquo;</a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-            <a class="page-link" href="#">&raquo;</a>
-            </li>
-        {% endif %}
-    </ul>
-</div>
-</div>
-{{ moment.include_jquery() }}
-    {{ moment.include_moment() }}
-    {{ moment.locale('zh-cn') }}　
-<script>
-    var pagination_cls = document.getElementsByClassName('pagination')[0]
-    pagination_cls.addEventListener('click', function(event){
-        var focus = event.target
-        focus.parentElement.classList.add('active')
-        // last_focus = document.getElementsByClassName('active')[0]
-        // if (last_focus){
-        //     last_focus.classList.remove('active')
-        // }
-        console.log('被点击的元素',focus)
+<!-- pagination -->
 
-    })
-</script>
+  <ul class="pagination">
+    <li class="page-item {{ 'disabled' if articles.page == 1 }}">
+      <a class='page-link' href="{{ url_for(request.endpoint,sort_by=topic, p=1, query=query if query) }}"
+          aria-label="首页">
+        &laquo; 首页
+      </a>
+    </li>
+    <li class="page-item {{ 'disabled' if not articles.has_prev }}">
+      <a class='page-link'  href="{{ url_for(request.endpoint,sort_by=topic, p=articles.page - 1, query=query if query) }}"
+          aria-label="上一页">
+        上一页
+      </a>
+    </li>
+  {%- for page in articles.iter_pages() %}
+    <li class=" page-item {{ 'active' if page and page == articles.page }}">
+      {% if page %}
+        {% if page != articles.page %}
+          <a class='page-link' href="{{ url_for(request.endpoint,sort_by=topic, p=page, query=query if query) }}">{{ page }}</a>
+        {% else %}
+          <a href='' class=" page-link text-muted">{{ page }} <span class="sr-only">(current)</span> <a>
+        {% endif %}
+      {% else %}
+        <span class="ellipsis">…</span>
+      {% endif %}
+    </li>
+  {%- endfor %}
+    <li class="page-item {{ 'disabled' if not articles.has_next }}">
+      <a class='page-link' href="{{ url_for(request.endpoint,sort_by=topic, p=articles.page + 1, query=query if query) }}"
+          aria-label="下一页">
+        下一页
+      </a>
+    </li>
+    <li class=" page-item {{ 'disabled' if articles.page == articles.pages }}">
+      <a class='page-link' href="{{ url_for(request.endpoint,sort_by=topic, p=articles.pages, query=query if query) }}"
+          aria-label="末尾">
+        末尾 &raquo;
+      </a>
+    </li>
+  </ul>
+
+  {{ moment.include_jquery() }}
+  {{ moment.include_moment() }}
+  {{ moment.locale('zh-cn') }}
+
 {% endblock %}

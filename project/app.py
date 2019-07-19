@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, render_template
 from celery import Celery
 from project.blueprints.page.route_index import page
 from project.blueprints.user.views import user
+from project.blueprints.todo.views import todo
 from project.blueprints.admin.views import admin
 from project.blueprints.recipe.views import recipe
 from project.blueprints.user.models import User
@@ -18,9 +19,11 @@ def create_app(settings_override=None):
 
     app.config.from_object('config.settings')
     app.config.from_pyfile('settings.py', silent=True)
-    app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4'
+    # app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4'
     if settings_override is not None:
         app.config.update(settings_override)
+    print(app.config['TEST_STRING'])
+    register_errorhandlers(app)
     blueprints(app)
     extension(app)
     authentication(app)
@@ -33,6 +36,7 @@ def blueprints(app):
     app.register_blueprint(user)
     app.register_blueprint(admin)
     app.register_blueprint(recipe)
+    app.register_blueprint(todo)
 
 
 #celery
@@ -75,3 +79,12 @@ def authentication(app):
             #转换datetime.fromtimestamp(timestamp)
             u.save()
         return u
+
+def register_errorhandlers(app):
+        def render_error(error):
+            error_code = getattr(error, 'code', 500)                        #获得error对象的code属性值，默认为500
+            return render_template("errors/{0}.html".format(error_code)), error_code
+
+        for errcode in [404, 500]:
+            app.errorhandler(errcode)(render_error)
+        return None

@@ -24,7 +24,9 @@ html, body{
     font-size: 120%;
 }
 
-
+.text-muted{
+  color: white !important;
+}
 
 .each{
 

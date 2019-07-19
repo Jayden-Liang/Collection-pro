@@ -15,4 +15,4 @@ RUN pip3 install -r requirements.txt
 COPY . .
 RUN pip3 install --editable .
 
-CMD gunicorn -b 0.0.0.0:5000 --access-logfile - "project.app:create_app()"  #defalt when you start it
+CMD gunicorn -c "python:config.gunicorn" "project.app:create_app()"

@@ -88,13 +88,7 @@ font-size:0.9rem;
 ul li{
 font-size:0.9rem;
 }
-/*	.operation{
-float: right;
-   width：100px;
-   margin-right: 100px;
-}
 
-*/
-.buttons{
-  display: inline-block;
+.btn-dark{
+  
 }

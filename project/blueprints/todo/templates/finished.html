@@ -1,0 +1,51 @@
+{% extends 'blog_base.html' %}
+
+{% block head %}
+    <title>完成事项</title>
+    <style media="screen">
+      .myNav{
+        padding: 1rem;
+        background-color: #B1B2C4;
+        margin-bottom: 1rem;
+
+      }
+
+      .myNav .nav-link {
+        color: white !important;
+      }
+
+      .lists{
+        width: 50%;
+        margin: auto;
+        margin-top: 5rem;
+      }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+<div class="lists">
+   <ul class="list-group">
+     <li class='list-group-item active'>
+        完成事项
+     </li>
+     <div class="todos">
+     {% for todo in todos %}
+       {% if todo.done == 1 %}
+        <li class='list-group-item items list-{{ todo.id }}'>
+          <div class="row">
+             <div class="col col-sm-10">
+               <i class="far fa-check-square"></i> {{ todo.body }}
+             </div>
+             <div class="del del-{{ todo.id }} col col-sm-2">
+               删除
+             </div>
+          </div>
+
+        </li>
+       {% endif %}
+     {% endfor %}
+     </div>
+   </ul>
+</div>
+{% endblock %}
