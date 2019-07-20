@@ -2,7 +2,7 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker-compose build
+  - docker-compose up --build -d
 script:
   - docker-compose exec website py.test project/test
 deploy:
