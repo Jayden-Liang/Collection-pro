@@ -3,7 +3,7 @@ MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 
 
 RUN apt-get update && apt-get install -y gcc
-RUN apt-get update && apt-get -y install python3-dev
+RUN apt-get update && apt-get -y install python3.6-dev
 RUN apt-get update && apt-get -y install default-libmysqlclient-dev
 
 
@@ -15,7 +15,7 @@ WORKDIR $INSTALL_PATH
 
 COPY requirements.txt requirements.txt
 
-RUN pip3 install mysqlclient==1.3.6
+RUN pip3 install mysqlclient
 RUN pip3 install -r requirements.txt
 
 
