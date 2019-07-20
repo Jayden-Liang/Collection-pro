@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM python:3.6
 MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 
 
