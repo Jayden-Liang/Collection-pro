@@ -2,7 +2,7 @@ FROM python:3.7
 
 
 RUN apt-get update && apt-get install -y gcc
-RUN apt-get update && apt-get -y install python3.6-dev
+RUN apt-get update && apt-get -y install python3-dev
 RUN apt-get update && apt-get -y install default-libmysqlclient-dev
 
 
