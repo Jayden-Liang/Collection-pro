@@ -1,10 +1,10 @@
 FROM python:3.6-slim
 MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 
-RUN apt-get install MariaDB-devel MariaDB-shared
+
 RUN apt-get update && apt-get install -y gcc
 RUN apt-get update && apt-get -y install default-libmysqlclient-dev
-
+RUN apt-get install MariaDB-devel MariaDB-shared
 
 ENV INSTALL_PATH /project
 RUN mkdir -p $INSTALL_PATH
