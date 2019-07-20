@@ -3,7 +3,8 @@ MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 
 
 RUN apt-get update && apt-get install -y gcc
-RUN apt-get update && apt-get -y install MariaDB-devel MariaDB-shared default-libmysqlclient-dev
+RUN apt-get update && apt-get -y install MariaDB-server MariaDB-client default-libmysqlclient-dev
+RUN apt-get update && apt-get -y install python3-dev
 
 
 ENV INSTALL_PATH /project
