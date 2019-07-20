@@ -1,12 +1,12 @@
 import os
-from dotenv import load_dotenv
-b = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-env_path = os.path.join(b, '.env')
-load_dotenv(dotenv_path=env_path)
+# from dotenv import load_dotenv
+# b = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+# env_path = os.path.join(b, '.env')
+# load_dotenv(dotenv_path=env_path)
 
 DEBUG = True
 SERVER_NAME = 'localhost:5000'
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'dev secret key'  #os.getenv('SECRET_KEY')
 
 #flask dropzone
 # MAX_CONTENT_LENGTH =3*1024*1024
@@ -28,8 +28,8 @@ SEED_ADMIN_PASSWORD = '123456'
 # MAIL_SERVER='smtp.sendgrid.net'
 # MAIL_PORT=587
 # MAIL_USE_TLS=True
-# MAIL_USERNAME='apikey'
-SENDGRID_API_KEY= os.getenv('SENDGRID_API_KEY')
+# # MAIL_USERNAME='apikey'
+# SENDGRID_API_KEY= os.getenv('SENDGRID_API_KEY')
 
 
 #Celery
