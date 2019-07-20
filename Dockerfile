@@ -4,13 +4,16 @@ MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 RUN apt-get update && apt-get install -y gcc
 RUN apt-get update && apt-get -y install default-libmysqlclient-dev
 
+
 ENV INSTALL_PATH /project
 RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
 COPY requirements.txt requirements.txt
+RUN pip3 install -U git+git://github.com/PyMySQL/mysqlclient-python
 RUN pip3 install -r requirements.txt
+
 
 COPY . .
 RUN pip3 install --editable .

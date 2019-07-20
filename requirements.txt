@@ -3,7 +3,7 @@ requests
 Flask
 Pillow
 pymongo
-mysqlclient==1.3.4
+# mysqlclient==1.3.4
 # Application server for both development and production.
 gunicorn
 pytest==4.3.0
