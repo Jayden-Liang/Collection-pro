@@ -23,19 +23,19 @@
         <a class="nav-link" href="{{ url_for('page.blog_index') }}">首页 <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('page.new') }}">发布</a>
+        <a target="_Blank" class="nav-link" href="{{ url_for('page.new') }}">发布</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('todo.index') }}">Todo</a>
+        <a target="_Blank" class="nav-link" href="{{ url_for('todo.index') }}">Todo</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           分类
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by="All", p=1)}}'>All</a>
+          <a target="_Blank" class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by="All", p=1)}}'>All</a>
           {% for topic in topics %}
-          <a class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by=topic.body, p=1)}}'>{{ topic.body }}</a>
+          <a target="_Blank" class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by=topic.body, p=1)}}'>{{ topic.body }}</a>
           {% endfor %}
         </div>
       </li>
