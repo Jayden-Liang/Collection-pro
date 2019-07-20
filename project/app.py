@@ -22,7 +22,7 @@ def create_app(settings_override=None):
     # app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4'
     if settings_override is not None:
         app.config.update(settings_override)
-    print(app.config['TEST_STRING'])
+    # print(app.config['TEST_STRING'])
     register_errorhandlers(app)
     blueprints(app)
     extension(app)
