@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker-compose up -d
+script:
+  - docker-compose exec website py.test project/test
+# deploy:
+#   provider: elasticbeanstalk
+#   access_key_id:
+#     secure: "wY8bImexZs2Mhk3U1IEUxxxrnD1zP9nq0/CQS2kQwUF5Or6IsWp/+jJl+roe7srZQaYS8L4Azsjn8lvgeI0/99GltpstYZNKc+QIbCPpB8wxJCncXNDFts/hNy58gdNd3/w1iIyO5WFiOiBqzJ9TdLBrRP461qvcwbR4pJDcPzJZzH9gx5J2rzsupmR8G7hVtKbybeL1SW65/+Py8DESEQy3MBp0ltQHp8+t51To1cjYtlGa5dIIAcfaUvu5m0tCqw1ScuPY7FTpu7of0EqGN1jabzTbmW3k/haZSR6vAtLs0RlDlY5LwVqpcrPMqhzkQnsZv8oeT8NKUo2NJugAMrFOH6c3fhicmMAlvi5aiiPdQP4MrPuJ7WG2uGH+Rvq0o6M+nxR/SovgAEkqiFLRCU78a7UnEOBoYSLkgnyPdn9h4nUcspeCJsIgxNhISKw+xcxB/fUOl2DTIn50YC6f8f146iUxv8LUV7fpRChs0wz64a+Cq+5kFlpLOzFOfjtIN7nd91WG1YG+QcPBr/Pbp2cZHKraSTBQpn8y8lQB4hl8V0fbr9fSrGmacDDmbP7VCCSXqFH9o6Gm92sf3zQBIcqQEly3vQ9NmH/wugRp1opdljVynUF6wABj2E//VNkEaJZbtuFLUfxBAknd42HB9fF2gMMKVO4DHeiyM+dKkbs="
+#   secret_access_key:
+#     secure: "juZElCgfAQmzeilmV1Jq3FCb0ycVMNb8UwzmfRJo4eXXMuEsLA8cjhMcJFtgzC+WL3JyBsTNnQeOiHX2FnClmVc80/QwDeAo3Wk7bhwHklzBbPxsOlBMzWXFC4BD6l+o9XF/e31EsBrSZpzaUQs56qKIiHTO4oX9yrxcg5l2s+39R8whsZcDmc1FYjIjjb28fB89ea9aTFmic1QjKkmO05mMOudoKPWPKYDZGeIrOZMD6WgBfGDd/OmLP/2cl9YUAyaYFMp6Y6h9CamjGPOpE5kpr1s6DNKoFkmlhID45GB4h9vISMOwvP26ulTLj7+r3zaiFxXeQpJXfIorJQGFQLt5daYED7OoPHDzO5ZrdA49+tBUI/culFjS94elAVwWSk5SZXcsSPoF3MN+Q3GiqpHHpVRHQ472vQ+e8Xx01Ms8988228aO9cDU7ddPQn6qJH91WLnE9mYLmgDWqn621QL2eABmTkhECQoTNCgiBGG2r9wuGqhNagoOixEtBss8GFqQBojq+PVu0yyXsmYipEuGatRMlFWWcRm8nWRzT6cXo3dDGZ0Ktngr2u6TuJyYRVj1lY7uN67tgaebvWWLi/IrncyjlITNT5HUxWegVuMdt/iwN6YWYR3K6dTCKcD/ygEj576rjTLMNCPTLIWi+wgjtwfDvlTvX5f7kpkx1xI="
+#   region: "us-east-2"           #region要对
+#   app: "docker-travis"
+#   env: "DockerTravis-env"
+#   bucket_name: "elasticbeanstalk-us-east-2-932745336105"      #到S3那里去复制
+#   bucket_path: "docker-travis"
+#   on:
+#     repo: Jayden-Liang/docker-travis-aws
