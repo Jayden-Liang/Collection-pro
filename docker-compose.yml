@@ -20,7 +20,23 @@ services:
       - '.:/project'
     ports:
       - '5000:5000'
+    expose:
+      - "5000"
     restart: always
+
+
+  nginx-fuck:
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '3000:80'
+      - '443:443'
+    depends_on:
+      - website
+
+    command: nginx -t -c /etc/nginx/default.conf
+
 
 
   mysql:
