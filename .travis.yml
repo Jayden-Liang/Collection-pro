@@ -9,9 +9,9 @@ script:
   - echo 'i am not gonna test for now'
 deploy:
   provider: elasticbeanstalk
-  access_key_id: $AWS_ACCESS_KEY
+  access_key_id:$AWS_ACCESS_KEY
   secret_access_key:
-      secure: “$AWS_SECRET_KEY”
+      secure:$AWS_SECRET_KEY
   region: "us-east-2"           #region要对
   app: "Collection-pro"
   env: "CollectionPro-env"
