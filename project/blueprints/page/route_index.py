@@ -38,9 +38,7 @@ def users():
     users = User.query.all()
     return render_template('users.html', users=users)
 
-@page.route('/ajax')
-def testAjax():
-    return render_template('test.html')
+
 
 @page.route('/info')
 @login_required
