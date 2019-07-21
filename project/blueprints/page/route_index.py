@@ -33,6 +33,7 @@ def index():
 
 #test for
 @page.route('/users')
+@login_required
 def users():
     users = User.query.all()
     return render_template('users.html', users=users)
@@ -51,7 +52,9 @@ def blog_index():
     random_today = get_random_study()
     return render_template('blog_index.html', blog=random_today)
 
+
 @page.route('/blog/new', methods=['POST','GET'])
+@login_required
 def new():
     if request.method == 'POST':
         current_time = datetime.utcnow()

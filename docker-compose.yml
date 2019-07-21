@@ -6,6 +6,7 @@ services:
     command: redis-server --requirepass devpassword      #默认没有密码，这里开启，密码必须和settings里的对应
     volumes:
       - 'redis:/var/lib/redis/data'
+    restart: always
     ports:
       - '6379:6379'
 
@@ -19,6 +20,7 @@ services:
       - '.:/project'
     ports:
       - '5000:5000'
+    restart: always
 
 
   mysql:
@@ -33,11 +35,13 @@ services:
     volumes:
       - './mysql.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf'
       - 'mysqlData:/var/lib/mysql'
+    restart: always
 
   mongo:
     image: 'mongo:3.6'
     volumes:
       - 'mongoData:/data/db'
+    restart: always
 
   celery:
     build: .
@@ -46,6 +50,7 @@ services:
       - '.env'
     volumes:
       - '.:/project'
+    restart: always
 
 volumes:
   redis:
