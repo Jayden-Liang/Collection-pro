@@ -12,10 +12,9 @@ deploy:
   access_key_id:$AWS_ACCESS_KEY
   secret_access_key:
       secure:$AWS_SECRET_KEY
-  region: "us-east-2"           #region要对
+  region: "us-east-2"
   app: "Collection-pro"
   env: "CollectionPro-env"
-  bucket_name: "elasticbeanstalk-us-east-2-932745336105"      #到S3那里去复制
-  bucket_path: "Collection-pro"
+  bucket_name: "elasticbeanstalk-us-east-2-932745336105"      
   on:
     repo: Jayden-Liang/Collection-pro
