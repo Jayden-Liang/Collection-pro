@@ -5,7 +5,7 @@ import os
 # load_dotenv(dotenv_path=env_path)
 
 DEBUG = True
-SERVER_NAME = '18.218.59.105:5000'
+SERVER_NAME = 'localhost:5000'
 SECRET_KEY = 'dev secret key'  #os.getenv('SECRET_KEY')
 
 #flask dropzone

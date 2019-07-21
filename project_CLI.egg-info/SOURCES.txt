@@ -1,0 +1,10 @@
+
+project_CLI.egg-info/PKG-INFO
+project_CLI.egg-info/SOURCES.txt
+project_CLI.egg-info/dependency_links.txt
+project_CLI.egg-info/entry_points.txt
+project_CLI.egg-info/requires.txt
+project_CLI.egg-info/top_level.txt
+cli/__init__.py
+cli/cli.py
+cli/commands/__init__.py
