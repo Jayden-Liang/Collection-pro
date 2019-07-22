@@ -80,3 +80,9 @@ a{
 	background-color: #ff7373;
 
 }
+
+@media (max-width: 992px) {
+  .catagory {
+    display: none;
+  }
+}

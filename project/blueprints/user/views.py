@@ -37,7 +37,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect('/')
+    return redirect(url_for('page.index'))
 
 #注册
 @user.route('/signup', methods=['POST', 'GET'])

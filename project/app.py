@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from celery import Celery
+from werkzeug.contrib.fixers import ProxyFix
 from project.blueprints.page.route_index import page
 from project.blueprints.user.views import user
 from project.blueprints.todo.views import todo
@@ -23,6 +24,8 @@ def create_app(settings_override=None):
     if settings_override is not None:
         app.config.update(settings_override)
     # print(app.config['TEST_STRING'])
+    app.logger.setLevel(app.config['LOG_LEVEL'])
+    middleware(app)
     register_errorhandlers(app)
     blueprints(app)
     extension(app)
@@ -38,6 +41,11 @@ def blueprints(app):
     app.register_blueprint(recipe)
     app.register_blueprint(todo)
 
+
+#ProxyFix
+def middleware(app):
+        app.wsgi_app = ProxyFix(app.wsgi_app)
+        return None
 
 #celery
 CELERY_TASK_LIST =[

@@ -1,19 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>update pwd page</title>
+    <title>update password page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style media="screen">
+    body{
+      margin: 0;
+      height: 100%;
+    }
+    .main{
+      height: 100%;
+      width: 1000%;
+      margin: auto;
+      display: table;
+    }
+    .content{
+      display: table-cell;
+      vertical-align: middle;
+      width:100%;
+    }
+    .inner{
+      margin:auto;
+      margin-top: 10rem;
+    }
+    .myButton{
+      margin-top: 1rem;
+      border-radius: 18px;
+      background-color: #3399ff;
+      text-decoration: none;
+      width: 20%;
+      border: 1px solid;
+      border-color:#3399ff;
+      padding: 7px 13px;
+      display: inline-block;
+      color: white;
+    }
+  </style>
   </head>
 {% block body %}
-<h1>this is the page for updating pwd</h1><br>
+ <div class="container main ">   <!-- d-flex justify-content-center align-items-center -->
+ <div class="content">
+   <div class="inner">
+
+  <h1 class="text-center"> Updating Password</h1><br>
+   <!-- form -->
   <form class="form" action="{{ url_for('user.update_pwd') }}" method="post">
      {{ form.hidden_tag() }}
-     {{ form.identity.label }} {{ form.identity(size=20, class= 'form-control') }}
+     <!-- 第一个input  -->
+     <div class="form-group">
+      {{ form.identity.label }}
+      {{ form.identity(size=20, class= 'form-control') }}
+       {% for message in form.identity.errors %}
+         <small class='error form-text text-muted'>{{ message }}</small>
+       {% endfor %}
+    </div>
+
+        <!-- 第二个input -->
+      <div class="form-group">
      {{ form.curent_password.label }} {{ form.curent_password(size=20, class= 'form-control') }}
-     {{ form.new_pwd.label }} {{ form.new_pwd(size=20, class= 'form-control') }}
-     <button type="submit" name="button">提交</button>
+     {% for message in form.curent_password.errors %}
+        <small class='error'>{{ message }}</small>
+        {% endfor %}
+      </div>
+        <!-- 第三个input -->
+      <div class="form-group">
+     {{ form.new_pwd.label }}
+     {{ form.new_pwd(size=20, class= 'form-control') }}
+     {% for message in form.new_pwd.errors %}
+        <small class='error'>{{ message }}</small>
+        {% endfor %}
+      </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="myButton" name="button">提交</button>
+        </div>
+
   </form>
   <br>
-  <a href="{{ url_for('user.settings') }}"></a>
+  <a href="{{ url_for('user.settings') }}">返回设置页面</a>
+  </div>
+  </div>
+  </div>
 {% endblock %}
 </html>

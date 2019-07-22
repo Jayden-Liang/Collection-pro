@@ -2,21 +2,59 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>register page</title>
+    <title>sign up page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/blog/signup.css') }}">
     <style media="screen">
-      body{
-        background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
-        background-repeat: no-repeat;
-        height: 100vh;
-        margin: 0;
 
-      }
     </style>
   </head>
+
+
+
 {% block body %}
  <div class="container-fluid">
+<div class="row">
+  <div class="col my-pic col-lg-4">
+  </div>
+  <div class="col-lg-8 form-box d-flex justify-content-center align-items-center" >
+    <div class="form-inner">
+     <h1 class="text-center">Sign up Account</h1>
+    <form class="form " action="{{ url_for('user.signup') }}" method="post">
 
- <div class="row">
+      {{ form.hidden_tag() }}
+      <!-- 第一个input -->
+      <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg"> <i class='far fa-envelope'></i> </span>
+       </div>
+      {{ form.email(size=20, class= 'form-control') }}
+      </div>
+      {% for message in form.email.errors %}
+           <small class='error form-text text-muted'>{{ message }}</small>
+      {% endfor %}
+
+    <!-- 第二个input -->
+    <div class="input-group input-group-lg">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-lg"><i class='fas fa-user-lock'></i></span>
+     </div>
+      {{ form.password(size=20, class= 'form-control') }}
+     </div>
+     {% for message in form.password.errors %}
+       <small class='error'>{{ message }}</small>
+      {% endfor %}
+     <div class="d-flex justify-content-center">
+         <button type="submit" class='myButton' name="button">注册</button>
+     </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+</div>
+ <!-- <div class="row">
    <div class="col col-lg-4">
      <h1>Collection</h1> <br>
      <p class="p1">记录自己学习的网站</p>
@@ -35,10 +73,10 @@
          {% endfor %}
         <button type="submit" name="button">提交</button>
      </form>
-   </div>
- </div>
+   </div> -->
+ <!-- </div>
 
 
-  </div>
+  </div> -->
 {% endblock %}
 </html>

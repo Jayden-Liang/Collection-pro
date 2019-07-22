@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style media="screen">
+      .fa-sign-in-alt, .fa-sign-out-alt{
+        color: #800080;
+      }
+      .btn-transparent{
+        outline: none;
+      }
+      .pop{
+          margin: 15px;
+          cursor: pointer;
+      }
+
+    </style>
     {% block head %}
     {% endblock %}
   </head>
@@ -26,7 +39,7 @@
         {% if current_user.is_authenticated %}
              <a target="_Blank" class="nav-link" href="{{ url_for('page.new') }}">发布</a>
         {% else %}
-             <span class="nav-link">发布</span>
+             <span class='pop' tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Store your collection" data-content="Record your own collection, sign up and have a try">发布</span>
         {% endif %}
 
       </li>
@@ -34,7 +47,7 @@
         {% if current_user.is_authenticated %}
              <a target="_Blank" class="nav-link" href="{{ url_for('todo.index') }}">Todo</a>
         {% else %}
-             <span class="nav-link">Todo</span>
+             <span class='pop' tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Todo" data-content=" Todo is a good tool for your task management, sign up and have a try">Todo</span>
         {% endif %}
 
       </li>
@@ -43,18 +56,26 @@
           分类
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a target="_Blank" class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by="All", p=1)}}'>All</a>
+          <a  class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by="All", p=1)}}'>All</a>
           {% for topic in topics %}
-          <a target="_Blank" class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by=topic.body, p=1)}}'>{{ topic.body }}</a>
+          <a class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by=topic.body, p=1)}}'>{{ topic.body }}</a>
           {% endfor %}
         </div>
       </li>
     </ul>
-    <form action = '{{ url_for("page.blog_topic") }}'  class="form-inline my-2 my-lg-0">
+
+    <form action = '{{ url_for("page.blog_topic") }}'  class="form-inline  ">
       <input type="hidden" name="sort_by" value="search"/>
       <input class="form-control mr-sm-2" name='query' type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success " type="submit">Search</button>
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('user.logout') }}"> <button type="button" class='btn bg-transparent' name="button"><i class="fas fa-sign-out-alt"></i> 登出</button> </a>
+      {% else %}
+      <a href="{{ url_for('user.login') }}"> <button type="button" class='btn bg-transparent' name="button"><i class="fas fa-sign-in-alt"></i> 登录</button> </a>
+      {% endif %}
     </form>
+
+
   </div>
 </nav>
 </div>
@@ -64,9 +85,21 @@
 {% endblock %}
 
 
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+</script>
+<!-- <script type="text/javascript">
+  document.querySelector('.btn-transparent').addEventListener('click', function(){
+    console.log('yes')
+  })
+</script> -->
   </body>
 </html>

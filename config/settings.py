@@ -4,7 +4,8 @@ import os
 # env_path = os.path.join(b, '.env')
 # load_dotenv(dotenv_path=env_path)
 
-DEBUG = True
+# DEBUG = True
+LOG_LEVEL = 'DEBUG'   #CRITICAL / ERROR / WARNING / INFO / DEBUG    DEBUG已经包含来其他几种类型
 # SERVER_NAME = 'localhost:5000'
 SECRET_KEY = 'dev secret key'  #os.getenv('SECRET_KEY')
 

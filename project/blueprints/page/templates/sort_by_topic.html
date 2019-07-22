@@ -10,7 +10,7 @@
 {% block body %}
 <div class='container' id='main'>
     <div class='row'>
-        <div class='col col-md-7'>
+        <div class='col col-lg-7'>
           <div class='content'>
              {% for article in articles.items %}
           <div class='each row'>
@@ -21,7 +21,7 @@
             {% endfor %}
         </div>
         </div>
-        <div class='col col-md-5  other-col'>
+        <div class=" col-lg-5">
           <div class='catagory'>
             <h1>{{ topic }}</h1>
             {% if topic  == 'All' %}
@@ -31,15 +31,13 @@
             {% else %}
                <p class='text-center'>关于{{ topic }}方面的知识！</p>
             {% endif %}
-
-
           </div>
         </div>
     </div>
-    <div>
+</div>
 
 <!-- pagination -->
-
+<div class="container">
   <ul class="pagination">
     <li class="page-item {{ 'disabled' if articles.page == 1 }}">
       <a class='page-link' href="{{ url_for(request.endpoint,sort_by=topic, p=1, query=query if query) }}"
@@ -79,6 +77,8 @@
       </a>
     </li>
   </ul>
+</div>
+
 
   {{ moment.include_jquery() }}
   {{ moment.include_moment() }}
