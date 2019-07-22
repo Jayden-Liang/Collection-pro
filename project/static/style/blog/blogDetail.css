@@ -9,7 +9,7 @@ src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf');
 }
 
 body{
-  font-family:NotoSansCJK-Light-3.otf;;
+  font-family:NotoSansCJK-Light-3.otf;
 }
 
 .myNav{
@@ -90,5 +90,5 @@ font-size:0.9rem;
 }
 
 .btn-dark{
-  
+
 }

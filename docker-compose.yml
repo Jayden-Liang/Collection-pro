@@ -19,10 +19,20 @@ services:
     volumes:
       - '.:/project'
     ports:
-      - '80:5000'
+      - '5000:5000'
     expose:
-      - "80"
+      - "5000"
     restart: always
+
+  nginx-container:
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - website
 
 
 
