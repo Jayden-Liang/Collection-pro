@@ -13,19 +13,32 @@
       }
     </style>
   </head>
-{% block
-   body %}
-  <form class="form" action="{{ url_for('user.signup') }}" method="post">
-     {{ form.hidden_tag() }}
-     {{ form.email.label }} {{ form.email(size=20, class= 'form-control') }}
-     {% for message in form.email.errors %}
-        <small class='error'>{{ message }}</small>
-      {% endfor %}
-     {{ form.password.label }} {{ form.password(size=20, class= 'form-control') }}
-     {% for message in form.password.errors %}
-        <small class='error'>{{ message }}</small>
-      {% endfor %}
-     <button type="submit" name="button">提交</button>
-  </form>
+{% block body %}
+ <div class="container-fluid">
+
+ <div class="row">
+   <div class="col col-lg-4">
+     <h1>Collection</h1> <br>
+     <p class="p1">记录自己学习的网站</p>
+   </div>
+   <div class="col form-box d-flex justify-content-center align-items-center col-lg-8">
+     <h1 class="display-4"> Sign up Account</h1>
+     <form class="form" action="{{ url_for('user.signup') }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.email.label }} {{ form.email(size=20, class= 'form-control') }}
+        {% for message in form.email.errors %}
+           <small class='error'>{{ message }}</small>
+         {% endfor %}
+        {{ form.password.label }} {{ form.password(size=20, class= 'form-control') }}
+        {% for message in form.password.errors %}
+           <small class='error'>{{ message }}</small>
+         {% endfor %}
+        <button type="submit" name="button">提交</button>
+     </form>
+   </div>
+ </div>
+
+
+  </div>
 {% endblock %}
 </html>
