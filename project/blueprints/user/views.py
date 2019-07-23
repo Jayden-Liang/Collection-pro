@@ -23,12 +23,12 @@ def login():
         u = User.find_by_identity(identity)
         if u and u.passwordmatch:
             login_user(u, remember=False)
-            track_activity(u, request.remote_addr)
+            track_activity(u, request.environ['REMOTE_ADDR'])
             if next:
                 return redirect(urljoin(request.host_url, next))
             else:
                 return redirect(url_for('user.settings'))
-        else: return '密码不正确'
+        # else: return '密码不正确'
 
     return render_template('login.html', form=form)
 

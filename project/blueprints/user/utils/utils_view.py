@@ -22,11 +22,10 @@ def anonymity_required(url='/settings'):
     return decorator
 
 def track_activity(u, ip):
-    current_time = datetime.utcnow()
     u.last_login_time = u.current_login_time
     u.last_login_ip = u.current_login_ip
 
-    u.current_login_time = current_time
+    u.current_login_time = datetime.utcnow()
     u.current_login_ip = ip
     u.save()
 
