@@ -23,7 +23,8 @@ def login():
         u = User.find_by_identity(identity)
         if u and u.passwordmatch:
             login_user(u, remember=False)
-            track_activity(u, request.environ['REMOTE_ADDR'])
+            print('看看environ', request.environ)
+            track_activity(u, request.environ.get('HTTP-X_REAL_IP', request.remote_addr))
             if next:
                 return redirect(urljoin(request.host_url, next))
             else:
