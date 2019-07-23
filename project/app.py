@@ -25,7 +25,7 @@ def create_app(settings_override=None):
         app.config.update(settings_override)
     # print(app.config['TEST_STRING'])
     app.logger.setLevel(app.config['LOG_LEVEL'])
-    middleware(app)
+    # middleware(app)
     register_errorhandlers(app)
     blueprints(app)
     extension(app)
