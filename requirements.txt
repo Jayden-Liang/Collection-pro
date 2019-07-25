@@ -1,3 +1,5 @@
+Flask-OAuthlib==0.9.5
+flask-mail==0.9.1
 beautifulsoup4
 requests
 Flask

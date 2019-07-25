@@ -35,11 +35,12 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ url_for('page.blog_index') }}">首页 <span class="sr-only">(current)</span></a>
       </li>
+
       <li class="nav-item">
         {% if current_user.is_authenticated %}
              <a target="_Blank" class="nav-link" href="{{ url_for('page.new') }}">发布</a>
         {% else %}
-             <span class='pop' tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Store your collection" data-content="Record your own collection, sign up and have a try">发布</span>
+             <span class='pop' tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Collection" data-content="记录你自己的笔记，登录使用">发布</span>
         {% endif %}
 
       </li>
@@ -47,7 +48,7 @@
         {% if current_user.is_authenticated %}
              <a target="_Blank" class="nav-link" href="{{ url_for('todo.index') }}">Todo</a>
         {% else %}
-             <span class='pop' tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Todo" data-content=" Todo is a good tool for your task management, sign up and have a try">Todo</span>
+             <span class='pop' tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" title="Todo" data-content=" 待办事项，登录使用">Todo</span>
         {% endif %}
 
       </li>
@@ -61,6 +62,9 @@
           <a class="dropdown-item" href='{{ url_for('page.blog_topic', sort_by=topic.body, p=1)}}'>{{ topic.body }}</a>
           {% endfor %}
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('recipe.index') }}">施工中... </a>
       </li>
     </ul>
 
@@ -78,6 +82,14 @@
 
   </div>
 </nav>
+</div>
+<div class="flash">
+
+{% for message in get_flashed_messages() %}
+   <div class='flash-alert text-center mx-auto'>
+       {{ message }}
+   </div>
+{% endfor %}
 </div>
 
 {% block body %}

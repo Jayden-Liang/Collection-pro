@@ -50,12 +50,12 @@
                 </textarea>
     </div>
      <div class="title">
-
 		<select class="form-control" name='topic' style="width: 45%">
 		 {% for topic in topics %}
 			 <option id='{{ topic.body }}' value="{{ topic.body }}">{{ topic.body }}</option>
 			 {% endfor %}
 		</select>
+    <a href="{{ url_for('page.add_topic') }}">添加Topic</a>
 		</div>
     <button type="submit" class="btn btn-light bg-primary button-new">提交</button>
 </form>

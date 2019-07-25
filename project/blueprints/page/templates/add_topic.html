@@ -1,0 +1,19 @@
+{% extends 'blog_base.html' %}
+
+{% block head %}
+<title>添加Topic</title>
+<style media="screen">
+  .myForm{
+    width: 20%;
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+<form class="myForm" action="{{ url_for('page.add_topic') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  {{ form.topic.label }} {{ form.topic(size=20, class= 'form-control') }}
+  <button type="submit" name="button">提交</button>
+</form>
+{% endblock %}

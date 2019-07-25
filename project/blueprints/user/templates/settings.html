@@ -32,9 +32,9 @@
       <br>
       <a href="{{ url_for('user.update_pwd') }}">更改密码</a>
       <br>
-      <p>此次于{{ moment(current_user.current_login_time).format('LLL') }} 登录，IP为：{{ current_user.current_login_ip }}</p>
+    <p>此次于{{ moment(current_user.current_login_time).format('LLL') }} 登录，  <!-- IP为：{{ current_user.current_login_ip }}</p> -->
       <p>上次登录：{{ current_user.last_login_time }}</p>
-      <p>上次登录ip: {{ current_user.last_login_ip }}</p>
+      <!-- <p>上次登录ip: {{ current_user.last_login_ip }}</p> -->
       <p>注册时间为： {{ moment(current_user.ct).format('LLL') }}  </p>
       <p>最近在线为：{{ moment(current_user.latest_online).fromNow() }}</p>
     </div>

@@ -49,14 +49,18 @@ var bindAdd = function(){
          document.querySelector('.todos').insertAdjacentHTML('beforeend', htmlString)
          form ={'todo': todo.value}
          apiAdd(form, function(r){
-           r =JSON.parse(r)
-           listId = 'list-'+r['id']
-           delId = 'del-'+r['id']
-           document.querySelector('.mark-1').classList.add(listId)
-           document.querySelector('.mark-2').classList.add(delId)
-           document.querySelector('.mark-1').classList.remove('mark-1')
-           document.querySelector('.mark-2').classList.remove('mark-2')
-           console.log('complete')
+           try{
+             r =JSON.parse(r)
+             listId = 'list-'+r['id']
+             delId = 'del-'+r['id']
+             document.querySelector('.mark-1').classList.add(listId)
+             document.querySelector('.mark-2').classList.add(delId)
+             document.querySelector('.mark-1').classList.remove('mark-1')
+             document.querySelector('.mark-2').classList.remove('mark-2')
+             console.log('complete')
+           }catch(e){
+             alert("出错了哦，没有写入数据库")
+           }
          })
          todo.value=''
          todo.focus()
@@ -76,6 +80,7 @@ var bindDelete = function(){
   t = document.querySelector('.todos')
   t.addEventListener('click', function(event){
     e = event.target
+    console.log(e)
     if (e){
       clsName = e.classList
       if (clsName.contains('del')){
@@ -88,7 +93,8 @@ var bindDelete = function(){
           console.log(r)
         })
       }
-      if (clsName.contains('col')){
+      if (clsName.contains('col') || clsName.contains('far')){
+        e =event.target.closest('.col')
         if (e.children[0]){
           e.children[0].classList.remove('fa-square')
           e.children[0].classList.add('fa-check-square')

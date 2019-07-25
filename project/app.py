@@ -4,10 +4,11 @@ from werkzeug.contrib.fixers import ProxyFix
 from project.blueprints.page.route_index import page
 from project.blueprints.user.views import user
 from project.blueprints.todo.views import todo
+from project.blueprints.contact.views import contact
 from project.blueprints.admin.views import admin
 from project.blueprints.recipe.views import recipe
 from project.blueprints.user.models import User
-from project.extensions import  csrf, db, login_manager, moment, dropzone
+from project.extensions import  csrf, db, login_manager, moment, dropzone, mail
 from datetime import datetime
 
 def create_app(settings_override=None):
@@ -25,7 +26,7 @@ def create_app(settings_override=None):
         app.config.update(settings_override)
     # print(app.config['TEST_STRING'])
     app.logger.setLevel(app.config['LOG_LEVEL'])
-    # middleware(app)
+    middleware(app)
     register_errorhandlers(app)
     blueprints(app)
     extension(app)
@@ -40,6 +41,7 @@ def blueprints(app):
     app.register_blueprint(admin)
     app.register_blueprint(recipe)
     app.register_blueprint(todo)
+    app.register_blueprint(contact)
 
 
 #ProxyFix
@@ -48,8 +50,12 @@ def middleware(app):
         return None
 
 #celery
+
+
 CELERY_TASK_LIST =[
-    'project.blueprints.user.celery_task'
+    'project.blueprints.user.celery_task',
+    'project.blueprints.contact.celery_task',
+    'project.celery.celery_task'
 ]
 #celery
 def create_celery_app(app=None):
@@ -66,6 +72,8 @@ def create_celery_app(app=None):
     celery.Task = ContextTask
     return celery
 
+
+
 def extension(app):
     print('hi there')
     csrf.init_app(app)
@@ -73,6 +81,7 @@ def extension(app):
     login_manager.init_app(app)
     moment.init_app(app)
     dropzone.init_app(app)
+    mail.init_app(app)
     return None
 
 def authentication(app):

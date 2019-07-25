@@ -13,7 +13,7 @@ services:
   website:
     build: .
     command: >
-      gunicorn -c "python:config.gunicorn" "project.app:create_app()"
+      gunicorn -c "python:config.gunicorn"  "project.app:create_app()"
     environment:
       PYTHONUNBUFFERED: 'true'
     volumes:
@@ -58,7 +58,8 @@ services:
 
   celery:
     build: .
-    command: celery worker -l info -A project.blueprints.user.celery_task    #-l 可设置为info, debug,more, -A 传入包含task的那个文件
+    command: celery worker -l info -A project.celery.celery_task    #-l 可设置为info, debug,more, -A 传入包含task的那个文件
+
     env_file:
       - '.env'
     volumes:

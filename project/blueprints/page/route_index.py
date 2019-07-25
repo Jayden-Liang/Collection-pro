@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from project.blueprints.user.models import User, Role, Blog, Topic, Todo
+from project.blueprints.page.utils.utils import get_random_study
+from project.blueprints.page.form import TopicForm
 from project.extensions import db
-import random
+from sqlalchemy import and_
+
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
@@ -13,19 +16,15 @@ page = Blueprint('page', __name__, template_folder='templates')
 # 全局变量
 @page.context_processor
 def my_context_processor():
-    topics = Topic.query.all()
+    if current_user.is_anonymous:
+        topics = User.query.filter_by(email='liangjisong@foxmail.com').first().topics
+    else:
+        topics = current_user.topics
     return {'topics': topics,
             # 'admin' :
     }
 
-# 辅助函数
-def get_random_study():
-    last_id = Blog.query.filter().order_by(Blog.id.desc()).first().id  # 通过找到最后一个的id，用random.randint随机出每日推荐
-    while True:
-        random_today = Blog.query.filter_by(id=random.randint(1, last_id + 1)).first()
-        if random_today is not None:
-            break
-    return random_today
+
 
 @page.route('/')
 def index():
@@ -37,6 +36,25 @@ def index():
 def users():
     users = User.query.all()
     return render_template('users.html', users=users)
+
+#test for topic
+@page.route('/topic_test')
+@login_required
+def topic_test():
+    topics=current_user.topics
+    return render_template('topic-test.html', topics = topics)
+
+#添加topic
+@page.route('/add_topic',methods=['POST','GET'])
+@login_required
+def add_topic():
+    form = TopicForm()
+    if form.validate_on_submit():
+        t = Topic(body=form.topic.data)
+        db.session.add(t)
+        current_user.topics.append(t)
+        db.session.commit()
+    return render_template('add_topic.html', form=form)
 
 
 
@@ -56,7 +74,6 @@ def blog_index():
 def new():
     if request.method == 'POST':
         current_time = datetime.utcnow()
-        username = current_user.username
         title = request.form.get('title')
         body = request.form.get('body')
         topic = request.form.get('topic')
@@ -65,10 +82,10 @@ def new():
                         ct=current_time,
                         ut = current_time
                     )
-        user = User.query.filter_by(username=username).first()
+
         mytopic = Topic.query.filter_by(body = topic).first()
         mytopic.blogs.append(article)
-        article.user_id = user.id
+        article.user_id = current_user.id
         db.session.add(article)
         db.session.commit()
         return redirect(url_for('page.blog_topic', sort_by='All',page=1))
@@ -79,16 +96,19 @@ def blog_topic():
     q = None
     topic = request.args.get('sort_by','')
     page = request.args.get('p',1)
-    #如果是搜索字符串
-    # if data:
-    #     articles = Blog.query.filter(Blog.title.like('%{}%'.format(data))).paginate(int(page), 8, False)
-    #     topic = 'search'
     if topic == 'All':
-        articles = Blog.query.filter().order_by(Blog.ut.desc()).paginate(int(page), 8, False)
+        if current_user.is_anonymous:
+            user_id =User.query.filter_by(email='liangjisong@foxmail.com').first().id
+            articles = Blog.query.filter(Blog.user_id==user_id).order_by(Blog.ut.desc()).paginate(int(page), 8, False)
+        else:
+            articles = Blog.query.filter(Blog.user_id==current_user.id).order_by(Blog.ut.desc()).paginate(int(page), 8, False)
     elif topic == 'search':
         q = request.args.get('query','')
-        print(q)
-        articles = Blog.query.filter(Blog.title.like('%{}%'.format(q))).paginate(int(page), 8, False)
+        if current_user.is_anonymous:
+            user_id =User.query.filter_by(email='liangjisong@foxmail.com').first().id
+        else:
+            user_id = current_user.id
+        articles = Blog.query.filter(and_(Blog.user_id==user_id, Blog.title.like('%{}%'.format(q)))).paginate(int(page), 8, False)
     else:
         #因为这里使用的关系型，Blog.topic == target,直接填入字符串是不行
         target = Topic.query.filter_by(body =topic).first()

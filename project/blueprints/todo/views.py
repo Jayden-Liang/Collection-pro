@@ -13,23 +13,29 @@ from datetime import datetime
 
 @todo.context_processor
 def my_context_processor():
-    topics = Topic.query.all()
+    if current_user.is_anonymous:
+        topics = User.query.filter_by(email='liangjisong@foxmail.com').first().topics
+    else:
+        topics = current_user.topics
     return {'topics': topics,
             # 'admin' :
     }
 
 
 @todo.route('/todo')
+@login_required
 def index():
     todos = User.query.filter_by(username=current_user.username).first().todos
     return render_template('todo.html', todos = todos)
 
 @todo.route('/todo/finished')
+@login_required
 def finished():
     todos = User.query.filter_by(username=current_user.username).first().todos
     return render_template('finished.html', todos = todos)
 
 @todo.route('/todo/add', methods=['post'])
+@login_required
 def add():
     data = request.get_json()
     todo = data.get('todo')
@@ -50,6 +56,7 @@ def add():
 
 
 @todo.route('/todo/delete', methods=['post'])
+@login_required
 def delete():
     data  = request.get_json()
     id = data.get('todo')
@@ -60,6 +67,7 @@ def delete():
     return jsonify('deleted data')
 
 @todo.route('/todo/finish', methods=['post'])
+@login_required
 def finish():
     data  = request.get_json()
     id = data.get('todo')

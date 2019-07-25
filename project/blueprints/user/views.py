@@ -1,4 +1,4 @@
-from flask import redirect, render_template, Blueprint, request, flash, url_for
+from flask import redirect, render_template, Blueprint, request, flash, url_for, flash
 from project.blueprints.user.forms import sayhi, LoginForm, signupForm, getuserForm, update_emailForm, update_pwdForm, find_pwdForm, set_newpwdForm
 from project.blueprints.user.models import User
 from datetime import datetime
@@ -23,13 +23,13 @@ def login():
         u = User.find_by_identity(identity)
         if u and u.passwordmatch:
             login_user(u, remember=False)
-            print('看看environ', request.environ)
+            # print('看看environ', request.environ)
             track_activity(u, request.environ.get('HTTP-X_REAL_IP', request.remote_addr))
             if next:
                 return redirect(urljoin(request.host_url, next))
             else:
                 return redirect(url_for('user.settings'))
-        # else: return '密码不正确'
+        else: flash('密码或帐号不正确')
 
     return render_template('login.html', form=form)
 
@@ -117,9 +117,8 @@ def find_pwd():
     form = find_pwdForm()
     if form.validate_on_submit():
         token = serializer(form.email.data)
-        from project.blueprints.user.celery_task import sendgrid_email
-        sendgrid_email.delay('no-reply@example.com',form.email.data, name = 'user', token=token)
-        print('email has been sent to your box, please check')
+        from project.celery.celery_task import send_mail, send_without_celery
+        send_without_celery('密码重置', form.email.data, '请点击链接{}'.format(url_for('user.set_new_pwd', reset_token = token, _external =True)))
         return redirect('/')
     return render_template('find_pwd.html', form = form)
 

@@ -62,6 +62,8 @@ def new():
         return jsonify("saved")
     return render_template('new_recipe.html', form=form)
 
+
+
 @recipe.route('/upload_pics', methods=['POST', 'GET'])
 def test():
     if request.method =='POST' and 'file' in request.files:
@@ -78,7 +80,7 @@ def test():
         f.save(os.path.join('/project/project/static/style/pics/recipes', filename))
         fileName = get_filename(f, filename, 400)
         print('保存成功')
-    return render_template('test_upload.html')
+    return redirect('/recipe')#render_template('test_upload.html')
 
 
 @recipe.route('/get_pics')

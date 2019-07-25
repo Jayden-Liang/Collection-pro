@@ -13,8 +13,13 @@
          <div class=" col-lg-5 offset-lg-1">
            <div class="myCard">
              <h1>今日份知识</h1>
+             {% if blog %}
          <h3><a href="{{ url_for('page.detail', id=blog.id) }}">{{ blog.title }}</a>.</h3>
              <a href="{{ url_for('page.blog_topic', sort_by=blog.topic.body, page=1) }}"><i class='fas fa-tags'></i> {{ blog.topic.body }}</a>
+             {% else %}
+               <h3>没有数据,快去发布</h3>
+               <a href="#"><i class='fas fa-tags'></i> ...</a>
+               {% endif %}
            </div>
          </div>
          <div class="col-lg-6 position=relative">
