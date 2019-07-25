@@ -55,9 +55,10 @@
 			 <option id='{{ topic.body }}' value="{{ topic.body }}">{{ topic.body }}</option>
 			 {% endfor %}
 		</select>
-    <a href="{{ url_for('page.add_topic') }}">添加Topic</a>
-		</div>
+    <a href="{{ url_for('page.add_topic') }}">添加Topic</a><br>
+    <small>本来要判断提交，现在不想做，信息填满，第一次就加topic，不然500警告</small><br>
     <button type="submit" class="btn btn-light bg-primary button-new">提交</button>
+		</div>
 </form>
 
 <!-- <script type="text/javascript">

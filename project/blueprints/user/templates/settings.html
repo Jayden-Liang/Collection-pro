@@ -28,6 +28,12 @@
       {% else %}
          <p>you are not choose a username yet</p> <a href="{{ url_for('user.welcome') }}">go choose one</a>
       {% endif %}
+      <br>
+      {% if current_user.active == 1 %}
+         <p>已激活</p>
+      {% else %}
+        <p>未激活</p>
+      {% endif %}
        <a href="{{ url_for('user.update_email') }}">更改绑定邮箱</a>
       <br>
       <a href="{{ url_for('user.update_pwd') }}">更改密码</a>

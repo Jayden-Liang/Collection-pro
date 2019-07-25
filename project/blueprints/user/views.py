@@ -46,17 +46,30 @@ def logout():
 def signup():
     form = signupForm()
     if form.validate_on_submit():
-        print('received')
+        token = serializer(form.email.data)
         u = User(
                 email= form.email.data,
                 password = User.encryptpassword(form.password.data))
         u.ct = datetime.utcnow()
         u.save()
+        from project.celery.celery_task import send_mail, send_without_celery
+        send_without_celery('激活', form.email.data, '请点击链接激活{}'.format(url_for('user.activate', activate_token = token, _external =True)))
         if login_user(u):
             track_activity(u, request.remote_addr)
             return redirect(url_for('user.welcome'))
     return render_template('signup.html', form = form)
 
+#激活
+@user.route('/activate', methods=['POST', 'GET'])
+def activate():
+    token = request.args.get('activate_token')
+    u= deserializer(token)
+    print(token)
+    if u:
+        u.active = 1
+        u.save()
+        return redirect(url_for('user.login'))
+    return render_template('activate.html')
 
 #注册成功后的欢迎页面，在这个页面提示用户取用户名
 @user.route('/welcome', methods=['POST', 'GET'])

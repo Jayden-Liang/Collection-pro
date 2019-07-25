@@ -6,6 +6,7 @@
   </head>
 {% block body %}
 <h1>Thank you for your signup</h1><br>
+<h2>激活邮件已经发送，请注意查收哦</h2>
   <form class="form" action="{{ url_for('user.welcome') }}" method="post">
      {{ form.hidden_tag() }}
      {{ form.username.label }} {{ form.username(size=20, class= 'form-control') }}
