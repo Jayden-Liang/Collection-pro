@@ -16,13 +16,35 @@
           margin: 15px;
           cursor: pointer;
       }
+      .border-line{
+	     margin-top: 3rem;
+   }
+     /* body{
+       display: grid;
+       grid-template-rows: 1fr auto;
 
+     } */
+     html{
+       position: relative;
+       min-height: 100%;
+     }
+     .footer{
+	     /* grid-row: 5/6; */
+       position: absolute;
+       width: 100%;
+       bottom:0;
+     }
+     .list-inline li{
+       display: inline-block;
+     }
     </style>
     {% block head %}
     {% endblock %}
   </head>
   <body>
     <!-- nav section -->
+  <div class="outer-footer">
+
 <div class="container-fluid myNav">
 <nav class="navbar navbar-expand-md navbar-light bg-transparent ">
   <a class="navbar-brand" href="{{ url_for('page.blog_index') }}">Collection</a>
@@ -91,6 +113,24 @@
    </div>
 {% endfor %}
 </div>
+
+
+  </div>
+ <!--Section footer-->
+
+<footer class="footer text-center">
+    {% block pagination %}{% endblock %}
+    <HR class='border-line' style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#f1f1f1 SIZE=1>
+      <div class="container">
+        <ul class="list-inline">
+          <li class="text-muted">Collection &copy; 2019</li>
+          <li><a href="{{ url_for('contact.contact_index') }}">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+ </footer>
+
 
 {% block body %}
 
