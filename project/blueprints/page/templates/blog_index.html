@@ -27,7 +27,7 @@
                <img class='myImg'  src="{{ url_for('static', filename='style/pics/circle.png') }}" alt="">
                <div class="info-inner">
                  {% if current_user.is_authenticated %}
-                 <h2>{{ blog.user.username }}</h2>
+                 <h2>{{ current_user.username }}</h2>
                  {% else %}
                     <h2>Jayden-Liang</h2>
                   {% endif %}
