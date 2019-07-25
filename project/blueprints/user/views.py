@@ -53,7 +53,7 @@ def signup():
         u.ct = datetime.utcnow()
         u.save()
         from project.celery.celery_task import send_mail, send_without_celery
-        send_without_celery('激活', form.email.data, '请点击链接激活{}'.format(url_for('user.activate', activate_token = token, _external =True)))
+        send_without_celery('激活', form.email.data, '请点击链接激活{}'.format('http://hit-the-road.cc/activate?activate_token='+token))
         if login_user(u):
             track_activity(u, request.remote_addr)
             return redirect(url_for('user.welcome'))
@@ -131,7 +131,7 @@ def find_pwd():
     if form.validate_on_submit():
         token = serializer(form.email.data)
         from project.celery.celery_task import send_mail, send_without_celery
-        send_without_celery('密码重置', form.email.data, '请点击链接{}'.format(url_for('user.set_new_pwd', reset_token = token, _external =True)))
+        send_without_celery('密码重置', form.email.data, '请点击链接{}'.format('http://hit-the-road.cc/settings/set-new-pwd?reset_token='+token))   #这里用url_for更好，但是nginx的代理会变成http://wbesite....
         return redirect('/')
     return render_template('find_pwd.html', form = form)
 
