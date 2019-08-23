@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
 font-family: 'NotoSansCJK-Thin-2';
 src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Thin-2.otf');
 }
@@ -6,11 +6,11 @@ src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Thin-2.otf');
 @font-face {
 font-family: 'NotoSansCJK-Light-3';
 src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf');
-}
+} */
 
-body{
+/* body{
   font-family:NotoSansCJK-Light-3.otf;
-}
+} */
 
 .myNav{
   padding: 1rem;
@@ -22,13 +22,13 @@ body{
 .myNav .nav-link {
   color: white !important;
   font-weight: 400;
-  font-family:NotoSansCJK-Light-3.otf;
+  /* font-family:NotoSansCJK-Light-3.otf; */
   font-size: 105%;
 }
 
 #test-editormd-view{
   background-color: #f5f5f5;
-  font-family:NotoSansCJK-Light-3;
+  /* font-family:NotoSansCJK-Light-3; */
 }
 
 .markdown-body{

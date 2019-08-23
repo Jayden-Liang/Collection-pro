@@ -1,15 +1,22 @@
 
 
 
-@font-face {
-font-family: 'NotoSansCJK-Light-3';
-src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf');
-}
+/* @font-face {
+   font-family: 'NotoSansCJK-Light-3';
+   src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf');
+   src:
+           url('font/fontTest.otf?#font-spider') format('embedded-opentype'),
+           url('font/fontTest.woff') format('woff'),
+           url('font/fontTest.ttf') format('truetype'),
+           url('font/fontTest.svg') format('svg');
+         font-weight: normal;
+         font-style: normal;
+} */
 
 body,html {
   margin: 0;
   padding: 0;
-  font-family:'NotoSansCJK-Light-3.otf';
+  /* font-family:'NotoSansCJK-Light-3.otf'; */
    }
 
    /*

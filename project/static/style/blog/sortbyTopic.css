@@ -14,14 +14,14 @@ html, body{
 }
 
 
-@font-face {
+/* @font-face {
  font-family: 'NotoSansCJK-Light-3';
  src: url('../fonts/SiYuanHeiTiGoogleBan/NotoSansCJK-Light-3.otf')
-}
+} */
 
 #main{
-    font-family:NotoSansCJK-Light-3;
-    font-size: 120%;
+    /* font-family:NotoSansCJK-Light-3; */
+    /* font-size: 120%; */
 }
 
 .text-muted{
