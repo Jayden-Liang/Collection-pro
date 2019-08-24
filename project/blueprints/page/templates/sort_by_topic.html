@@ -14,7 +14,7 @@
           <div class='content'>
              {% for article in articles.items %}
           <div class='each row'>
-            <div class='col col-sm-10'><a href="blog/detail?id={{ article.id }}" target="_Blank">{{ article.title }}</a> </div>
+            <div class='col col-sm-10'><a href="blog/detail?id={{ article.id }}" >{{ article.title }}</a> </div>
                <div class='col col-sm-2'><span class='text-color'>{{ moment(article.ut).fromNow() }}</span></div>
                </div>
             <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#f1f1f1 SIZE=1>
