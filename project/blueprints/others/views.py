@@ -13,7 +13,7 @@ Ingres.insert({
     "salad":0
 
 })
-@Ingre.route('/')
+@Ingre.route('/', methods=['POST','GET'])
 def index():
     if request.method=="Post":
         data= request.get_json()
