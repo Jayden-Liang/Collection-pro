@@ -6,6 +6,7 @@ from flask_dropzone import Dropzone
 from flask_mail import Mail
 
 
+
 csrf = CSRFProtect()
 db = SQLAlchemy()
 login_manager = LoginManager()
