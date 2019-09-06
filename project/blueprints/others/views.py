@@ -21,8 +21,8 @@ def index():
         data= request.get_json()
         print(data)
         Ingres.insert(data)
-        return jsonify({"successfully":data})
-    a={}
+        return jsonify("successfully")
+    a=[]
     for x in Ingres.find({},{'_id':0}):
-        a.update(x)
+        a.append(x)
     return jsonify(a)
