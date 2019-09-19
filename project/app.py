@@ -8,7 +8,7 @@ from project.blueprints.contact.views import contact
 from project.blueprints.admin.views import admin
 from project.blueprints.recipe.views import recipe
 from project.blueprints.user.models import User
-from project.blueprints.others.views import Ingre
+from project.blueprints.others.views import Burger
 from project.extensions import  csrf, db, login_manager, moment, dropzone, mail
 from datetime import datetime
 
@@ -43,7 +43,7 @@ def blueprints(app):
     app.register_blueprint(recipe)
     app.register_blueprint(todo)
     app.register_blueprint(contact)
-    app.register_blueprint(Ingre)
+    app.register_blueprint(Burger)
 
 
 #ProxyFix
