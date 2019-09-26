@@ -41,3 +41,7 @@ def auth():
             pass
         # abort(500, message="Fatal error: Pizza the Hutt was found dead earlier")
         return jsonify(rt, 406)
+
+@Burger.route('file_password')
+def file():
+    return 'hello world'

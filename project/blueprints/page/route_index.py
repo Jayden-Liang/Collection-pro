@@ -112,7 +112,7 @@ def blog_topic():
     else:
         #因为这里使用的关系型，Blog.topic == target,直接填入字符串是不行
         target = Topic.query.filter_by(body =topic).first()
-        articles = Blog.query.filter(Blog.topic == target).order_by(Blog.ut.desc()).paginate(int(page), 8, False)
+        articles = Blog.query.filter(Blog.topic == target).order_by(Blog.ct.desc()).paginate(int(page), 8, False)
 
     pages = articles.pages
     return render_template('sort_by_topic.html', articles = articles,
