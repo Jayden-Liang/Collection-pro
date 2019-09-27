@@ -55,28 +55,42 @@ def pwd_init():
     pwdstorage.insert({'filePassword': "1234", 'history':[],"date":'9.26'})
     return 'initialed'
 
-# @Burger.route('show_pwd')
-# def show_pwd():
-#     a=[]
-#     for x in pwdstorage.find({},{'_id':0}):
-#         a.append(x)
-#     return jsonify(a)
+@Burger.route('show_pwd')
+def show_pwd():
+    a=[]
+    for x in pwdstorage.find({},{'_id':0}):
+        a.append(x)
+    return jsonify(a)
 
-@Burger.route('set_pwd')
+def generate_response(rt):
+    response=make_response(jsonify(rt))
+    response.headers['Access-Control-Allow-Origin']='http://localhost:5000'
+    return response
+
+
+@Burger.route('set_pwd', methods=['POST','GET'])
+@csrf.exempt
 def reset():
     localtime= time.localtime(time.time())
     newdate= str(localtime.tm_mon)+'.'+str(localtime.tm_mday)
-    print(localtime.tm_hour )
-    try:
-        response = make_response(jsonify({'filePassword': pwdstorage.find({"date": newdate})[0]['filePassword'],'date':newdate, "askedbefore":'yes'}))
-        response.headers['Access-Control-Allow-Origin']='http://localhost:3000'
-        return response
-    except IndexError:
-        newpwd = str(random.randint(1,100000000000))
-        pwdstorage.insert({'filePassword': newpwd,'date':newdate})
-        response=make_response(jsonify({'filePassword': newpwd,'date':newdate,"askedbefore":'no'}))
-        response.headers['Access-Control-Allow-Origin']='http://localhost:3000'
-        return response
+    if request.method=='POST':
+        try:
+            pwd=pwdstorage.find({"date": newdate})[0]['filePassword']
+            return generate_response({'filePassword': 'nopeek'})
+        except IndexError:
+            newpwd = str(random.randint(1,100000000000))
+            pwdstorage.insert({'filePassword': newpwd,'date':newdate})
+            return generate_response({'filePassword': newpwd,'date':newdate})
+
+    if localtime.tm_hour>=1:
+        try:
+            return generate_response({'filePassword': pwdstorage.find({"date": newdate})[0]['filePassword'],'date':newdate})
+        except IndexError:
+            return generate_response({'filePassword': "notset",'date':newdate})
+
+    else:
+        return generate_response({'filePassword': "unallowed",'date':newdate})
+
 
 
 
