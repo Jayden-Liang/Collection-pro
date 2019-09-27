@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import classes from './getPasswordQuestion.module.css'
 import Redirect from 'react-router-dom'
 import {connect} from 'react-redux'
-
+import * as actions from '../store/actions'
 
 
 const mapStateToProps=state=>{
@@ -14,7 +14,7 @@ const mapStateToProps=state=>{
 
 const mapDispatchToProps=(dispatch)=>{
   return {
-    onYesClicked: ()=> dispatch({type:'YESCLICKED'}),
+    onYesClicked: ()=> dispatch(actions.yesclicked()),
     onNoClicked: ()=> dispatch({type:'NOCLICKED'})
   }
 }
@@ -30,7 +30,7 @@ class GetPwd extends Component{
 
   }
 
-  
+
 
   render(){
     console.log(this.props)
