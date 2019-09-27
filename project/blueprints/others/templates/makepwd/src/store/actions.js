@@ -28,7 +28,7 @@ export const yeshandler=()=>{
 }
 export const yesclicked =()=>{
   return (dispatch)=>{
-    axios.get('localhost:5000/burger/set_pwd')
+    axios.get('http://hit-the-road.cc/burger/set_pwd')
     .then(result=>{
       console.log(result)
       dispatch(yeshandler())

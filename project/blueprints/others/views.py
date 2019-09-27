@@ -1,4 +1,4 @@
-from flask import redirect, render_template, Blueprint, request, flash, current_app, url_for, flash, jsonify, abort
+from flask import make_response, redirect, render_template, Blueprint, request, flash, current_app, url_for, flash, jsonify, abort
 from pymongo import MongoClient
 from project.extensions import  csrf
 import json
@@ -68,11 +68,15 @@ def reset():
     newdate= str(localtime.tm_mon)+'.'+str(localtime.tm_mday)
     print(localtime.tm_hour )
     try:
-        return jsonify({'filePassword': pwdstorage.find({"date": newdate})[0]['filePassword'],'date':newdate, "askedbefore":'yes'})
+        response = make_response(jsonify({'filePassword': pwdstorage.find({"date": newdate})[0]['filePassword'],'date':newdate, "askedbefore":'yes'}))
+        response.headers['Access-Control-Allow-Origin']='http://localhost:3000'
+        return response
     except IndexError:
         newpwd = str(random.randint(1,100000000000))
         pwdstorage.insert({'filePassword': newpwd,'date':newdate})
-        return jsonify({'filePassword': newpwd,'date':newdate,"askedbefore":'no'})
+        response=make_response(jsonify({'filePassword': newpwd,'date':newdate,"askedbefore":'no'}))
+        response.headers['Access-Control-Allow-Origin']='http://localhost:3000'
+        return response
 
 
 
