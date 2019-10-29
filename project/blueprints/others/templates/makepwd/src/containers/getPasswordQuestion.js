@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import classes from './getPasswordQuestion.module.css'
-import Redirect from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from '../store/actions'
-
+import FUCK from '../components/setPwd/setPwd'
 
 const mapStateToProps=state=>{
   return {
@@ -40,6 +40,10 @@ class GetPwd extends Component{
                 <button onClick={this.props.onYesClicked} type='button'>是的</button>
                 <button onClick={this.props.onNoClicked} type='button'>很惭愧，没有</button>
             </div>
+
+            <FUCK />
+
+            <Route path={'/go_pwd'} component={FUCK}></Route>
 
           </div>
   }
