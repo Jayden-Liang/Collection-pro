@@ -76,6 +76,9 @@ code{
 font-size: 0.9rem;
 
 }
+p code:first-child{
+  background: #bada55;
+}
 
 .text{
 font-size: 0.9rem;
