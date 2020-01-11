@@ -23,6 +23,7 @@ def create_app(settings_override=None):
 
     app.config.from_object('config.settings')
     app.config.from_pyfile('settings.py', silent=True)
+    app.config['JSON_AS_ASCII']=False
     # app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4'
     if settings_override is not None:
         app.config.update(settings_override)
