@@ -1,4 +1,4 @@
-from flask import redirect, render_template, Blueprint, request, flash, current_app, url_for, flash,jsonify
+from flask import make_response, redirect, render_template, Blueprint, request, flash, current_app, url_for, flash,jsonify
 import os
 import json
 
@@ -52,7 +52,9 @@ def show():
     # a=[]
     # for x in data:
     #     a.append(x)
-    return jsonify(data)
+    r=make_response(jsonify(data))
+    r.headers['Access-Control-Allow-Origin']='http://localhost:8080'
+    return r
 
 @api.route('/classroom/delete')
 @csrf.exempt
