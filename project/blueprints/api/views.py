@@ -62,6 +62,11 @@ def delete():
     bcz_topic.drop()
     return 'successfully'
 
+@api.route('/xiaochengxu/pic')
+@csrf.exempt
+def xiaochengxu():
+    return render_template('xiaochengxu.html')
+
 # {'topic':'延伸学习',
 #   'h1':'一串单词',
 #   'h2': '用记住一个单词的时间,记住一串单词',
