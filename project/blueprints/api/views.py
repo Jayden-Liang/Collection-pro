@@ -15,6 +15,7 @@ db = client.Api
 bcz_topic = db['bcz_topic']
 
 Memory_Card= db['Memory_Card']
+readingList =db['readingList']
 
 api= Blueprint('api', __name__, template_folder='templates', url_prefix='/api')
 
@@ -92,4 +93,27 @@ def mc():
 def mc_delete():
     # data= request.get_json()
     Memory_Card.drop()
+    return 'ok'
+
+
+@api.route('/readingList',methods=['POST','GET'])
+@csrf.exempt
+def reading_list():
+    data=readingList.find({},{"_id":0})
+    rt_data=[]
+    for item in data:
+        rt_data.append(item)
+    if request.method =='POST':
+        id=len(rt_data)+1
+        data = request.get_json()
+        data['id']=id
+        readingList.insert(data)
+        return 'inserted'
+    return jsonify(rt_data)
+
+@api.route('/readingList/delete',methods=['POST'])
+@csrf.exempt
+def rl_delete():
+    # data= request.get_json()
+    readingList.drop()
     return 'ok'
