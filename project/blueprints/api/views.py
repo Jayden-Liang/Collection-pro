@@ -16,7 +16,7 @@ bcz_topic = db['bcz_topic']
 
 Memory_Card= db['Memory_Card']
 readingList =db['readingList']
-dailyNote=db['dailyNote']
+dailynote =db['dailyNote']
 
 api= Blueprint('api', __name__, template_folder='templates', url_prefix='/api')
 
@@ -124,7 +124,7 @@ def rl_delete():
 @api.route('/dailyNote',methods=['POST','GET'])
 @csrf.exempt
 def dailyNote():
-    data=dailyNote.find({},{"_id":0})
+    data=dailynote.find({},{"_id":0})
     rt_data=[]
     for item in data:
         rt_data.append(item)
@@ -132,6 +132,6 @@ def dailyNote():
         id=len(rt_data)+1
         data = request.get_json()
         data['id']=id
-        dailyNote.insert(data)
+        dailynote.insert(data)
         return 'inserted'
     return jsonify(rt_data)
