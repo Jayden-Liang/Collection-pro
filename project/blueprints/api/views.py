@@ -101,19 +101,24 @@ def mc_delete():
 @api.route('/readingList',methods=['POST','GET'])
 @csrf.exempt
 def reading_list():
-    data=readingList.find({},{"_id":0})
+    if request.method =='POST':
+        data=readingList.find({},{"_id":0}).sort("id",pymongo.DESCENDING).limit(1)
+        last_data=[]
+        for item in data:
+            last_data.append(item)
+        if len(last_data)<1:
+            id= 1
+        else:
+            id=last_data[0]['id']+1
+        data = request.get_json()
+        data['id']=id
+        data['type']='wishList'
+        readingList.insert(data)
+        return 'inserted'
+    data=readingList.find({"type":'wishList'},{"_id":0})
     rt_data=[]
     for item in data:
         rt_data.append(item)
-    if request.method =='POST':
-        if len(rt_data)<1:
-            id= 1
-        else:
-            id=rt_data[-1]['id']+1
-        data = request.get_json()
-        data['id']=id
-        readingList.insert(data)
-        return 'inserted'
     return jsonify(rt_data)
 
 @api.route('/readingList/current-reading',methods=['POST','GET'])
