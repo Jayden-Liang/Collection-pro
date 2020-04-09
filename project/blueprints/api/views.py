@@ -165,7 +165,7 @@ def rl_delete():
 @csrf.exempt
 def dailyNote():
     if request.method =='POST':
-        data=readingList.find({},{"_id":0}).sort("id",pymongo.DESCENDING).limit(1)
+        data=dailynote.find({},{"_id":0}).sort("id",pymongo.DESCENDING).limit(1)
         last_data=[]
         for item in data:
             last_data.append(item)
