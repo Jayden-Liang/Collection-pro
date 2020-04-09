@@ -105,19 +105,29 @@ def reading_list():
     for item in data:
         rt_data.append(item)
     if request.method =='POST':
-        id=len(rt_data)+1
+        if len(rt_data)<1:
+            id= 1
+        else:
+            id=rt_data[-1]['id']+1
         data = request.get_json()
         data['id']=id
         readingList.insert(data)
         return 'inserted'
     return jsonify(rt_data)
 
+@api.route('/readingList/addtype')
+@csrf.exempt
+def rl_addtype():
+    readingList.update_many({},{"$set":{'type':'wishList'}})
+    return 'ok'
+
 @api.route('/readingList/delete',methods=['POST'])
 @csrf.exempt
 def rl_delete():
-    # data= request.get_json()
-    readingList.drop()
-    return 'ok'
+    if request.method =='POST':
+        id=request.get_json()['id']
+        readingList.remove({'id': id})
+        return 'deleted'
 
 
 
@@ -129,9 +139,21 @@ def dailyNote():
     for item in data:
         rt_data.append(item)
     if request.method =='POST':
-        id=len(rt_data)+1
+        if len(rt_data)<1:
+            id= 1
+        else:
+            id=rt_data[-1]['id']+1
         data = request.get_json()
+        print(data)
         data['id']=id
         dailynote.insert(data)
         return 'inserted'
     return jsonify(rt_data)
+
+@api.route('/dailyNote/delete',methods=['POST'])
+@csrf.exempt
+def dailyNotedel():
+    if request.method =='POST':
+        id=request.get_json()['id']
+        dailynote.remove({'id': id})
+        return 'deleted'
